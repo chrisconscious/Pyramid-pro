@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Projects — Pyramid Engineering & Construction LTD</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+
+<nav class="navbar" id="navbar">
+  <div class="nav-inner container">
+    <a href="index.html" class="logo">
+      <img src="../logo.png" alt="Pyramid Logo" style="height:48px;width:auto;">
+      <div class="logo-text">
+        <span class="logo-main">PYRAMID</span>
+        <span class="logo-sub">Engineering & Construction</span>
+      </div>
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html" class="nav-link" data-i18n="nav.home">Home</a></li>
+      <li><a href="services.html" class="nav-link" data-i18n="nav.services">Services</a></li>
+      <li><a href="projects.html" class="nav-link active" data-i18n="nav.projects">Projects</a></li>
+      <li><a href="about.html" class="nav-link" data-i18n="nav.about">About</a></li>
+      <li><a href="blog.html" class="nav-link" data-i18n="nav.blog">Blog</a></li>
+      <li><a href="contact.html" class="nav-link" data-i18n="nav.contact">Contact</a></li>
+    </ul>
+    <div class="nav-actions">
+      <div class="lang-switcher">
+        <button class="lang-btn active" onclick="setLang('en')">EN</button>
+        <button class="lang-btn" onclick="setLang('sw')">SW</button>
+        <button class="lang-btn" onclick="setLang('fr')">FR</button>
+      </div>
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme"><i class="fa-solid fa-moon" id="iconMoon"></i><i class="fa-solid fa-sun" id="iconSun" style="display:none"></i></button>
+      <a href="contact.html" class="btn-primary btn-sm" data-i18n="nav.quote">Get a Quote</a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Menu"><i class="fa-solid fa-bars" id="menuIcon"></i></button>
+    </div>
+  </div>
+</nav>
+
+<!-- MOBILE MENU BACKDROP -->
+<div class="mobile-menu-backdrop" id="mobileMenuBackdrop"></div>
+
+<section class="page-hero">
+  <div class="container page-hero-content">
+    <div class="breadcrumb">
+      <a href="index.html">Home</a>
+      <span class="sep">/</span>
+      <span data-i18n="nav.projects">Projects</span>
+    </div>
+    <div class="section-label light" data-i18n="proj.label">Our Portfolio</div>
+    <h1 data-i18n="page.projects.title">Our Projects</h1>
+    <p data-i18n="page.projects.sub">Explore our portfolio of completed residential, commercial, and government construction projects across Tanzania.</p>
+  </div>
+</section>
+
+<section class="section-pad">
+  <div class="container">
+    <!-- FILTER BAR -->
+    <div class="filter-bar">
+      <button class="filter-btn active" data-filter="all" data-i18n="proj.all">All</button>
+      <button class="filter-btn" data-filter="residential" data-i18n="proj.cat.residential">Residential</button>
+      <button class="filter-btn" data-filter="commercial" data-i18n="proj.cat.commercial">Commercial</button>
+      <button class="filter-btn" data-filter="government" data-i18n="proj.cat.government">Government</button>
+    </div>
+
+    <!-- PROJECTS GRID -->
+    <div class="projects-full-grid">
+
+      <a href="project-detail.html" class="proj-full-card" data-category="commercial">
+        <div class="proj-img">
+          <img src="https://images.unsplash.com/photo-1486325212027-8081e485255e?w=700&q=80" alt="Business Hub" loading="lazy">
+          <span class="proj-tag" style="position:absolute;top:16px;left:16px;">Commercial</span>
+        </div>
+        <div class="proj-full-info">
+          <h3>Dar es Salaam Business Hub</h3>
+          <p style="color:var(--text-light);font-size:14px;line-height:1.6;">A 12-storey mixed-use commercial complex housing offices, retail, and parking facilities.</p>
+          <div class="proj-meta">
+            <span><i class="fa-solid fa-location-dot fi"></i> Dar es Salaam</span>
+            <span><i class="fa-solid fa-calendar"></i> 2023</span>
+            <span><i class="fa-solid fa-layer-group"></i> 12 Floors</span>
+          </div>
+        </div>
+      </a>
+
+      <a href="project-detail.html" class="proj-full-card" data-category="residential">
+        <div class="proj-img">
+          <img src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=700&q=80" alt="Luxury Villa" loading="lazy">
+          <span class="proj-tag" style="position:absolute;top:16px;left:16px;">Residential</span>
+        </div>
+        <div class="proj-full-info">
+          <h3>Luxury Villa, Mikocheni</h3>
+          <p style="color:var(--text-light);font-size:14px;line-height:1.6;">A stunning 5-bedroom luxury villa with pool, landscaped gardens, and smart home integration.</p>
+          <div class="proj-meta">
+            <span><i class="fa-solid fa-location-dot fi"></i> Mikocheni, DSM</span>
+            <span><i class="fa-solid fa-calendar"></i> 2022</span>
+            <span><i class="fa-solid fa-house"></i> 650 m²</span>
+          </div>
+        </div>
+      </a>
+
+      <a href="project-detail.html" class="proj-full-card" data-category="government">
+        <div class="proj-img">
+          <img src="https://images.unsplash.com/photo-1523217582562-09d0def993a6?w=700&q=80" alt="Admin Block" loading="lazy">
+          <span class="proj-tag" style="position:absolute;top:16px;left:16px;">Government</span>
+        </div>
+        <div class="proj-full-info">
+          <h3>Regional Admin Block, Dodoma</h3>
+          <p style="color:var(--text-light);font-size:14px;line-height:1.6;">Government regional headquarters featuring 3,500m² of modern administrative spaces.</p>
+          <div class="proj-meta">
+            <span><i class="fa-solid fa-location-dot fi"></i> Dodoma</span>
+            <span><i class="fa-solid fa-calendar"></i> 2022</span>
+            <span><i class="fa-solid fa-layer-group"></i> 4 Floors</span>
+          </div>
+        </div>
+      </a>
+
+      <a href="project-detail.html" class="proj-full-card" data-category="residential">
+        <div class="proj-img">
+          <img src="https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=700&q=80" alt="Apartment Complex" loading="lazy">
+          <span class="proj-tag" style="position:absolute;top:16px;left:16px;">Residential</span>
+        </div>
+        <div class="proj-full-info">
+          <h3>Masaki Apartment Complex</h3>
+          <p style="color:var(--text-light);font-size:14px;line-height:1.6;">48-unit premium apartment development with underground parking and rooftop amenities.</p>
+          <div class="proj-meta">
+            <span><i class="fa-solid fa-location-dot fi"></i> Masaki, DSM</span>
+            <span><i class="fa-solid fa-calendar"></i> 2021</span>
+            <span><i class="fa-solid fa-building"></i> 48 Units</span>
+          </div>
+        </div>
+      </a>
+
+      <a href="project-detail.html" class="proj-full-card" data-category="commercial">
+        <div class="proj-img">
+          <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=700&q=80" alt="Retail Mall" loading="lazy">
+          <span class="proj-tag" style="position:absolute;top:16px;left:16px;">Commercial</span>
+        </div>
+        <div class="proj-full-info">
+          <h3>Kariakoo Retail Center</h3>
+          <p style="color:var(--text-light);font-size:14px;line-height:1.6;">A vibrant retail and market center serving over 200 vendors with modern facilities.</p>
+          <div class="proj-meta">
+            <span><i class="fa-solid fa-location-dot fi"></i> Kariakoo, DSM</span>
+            <span><i class="fa-solid fa-calendar"></i> 2020</span>
+            <span> 200+ Stalls</span>
+          </div>
+        </div>
+      </a>
+
+      <a href="project-detail.html" class="proj-full-card" data-category="government">
+        <div class="proj-img">
+          <img src="https://images.unsplash.com/photo-1562774053-701939374585?w=700&q=80" alt="School Building" loading="lazy">
+          <span class="proj-tag" style="position:absolute;top:16px;left:16px;">Government</span>
+        </div>
+        <div class="proj-full-info">
+          <h3>Mbeya Technical College Block</h3>
+          <p style="color:var(--text-light);font-size:14px;line-height:1.6;">An academic block with 24 classrooms, laboratories, and staff offices for 1,200 students.</p>
+          <div class="proj-meta">
+            <span><i class="fa-solid fa-location-dot fi"></i> Mbeya</span>
+            <span><i class="fa-solid fa-calendar"></i> 2021</span>
+            <span> 1,200 Capacity</span>
+          </div>
+        </div>
+      </a>
+
+      <a href="project-detail.html" class="proj-full-card" data-category="residential">
+        <div class="proj-img">
+          <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=700&q=80" alt="Modern Home" loading="lazy">
+          <span class="proj-tag" style="position:absolute;top:16px;left:16px;">Residential</span>
+        </div>
+        <div class="proj-full-info">
+          <h3>Modern Family Home, Mbezi</h3>
+          <p style="color:var(--text-light);font-size:14px;line-height:1.6;">Contemporary 4-bedroom family home with open-plan living, solar energy, and borehole.</p>
+          <div class="proj-meta">
+            <span><i class="fa-solid fa-location-dot fi"></i> Mbezi, DSM</span>
+            <span><i class="fa-solid fa-calendar"></i> 2023</span>
+            <span><i class="fa-solid fa-house"></i> 320 m²</span>
+          </div>
+        </div>
+      </a>
+
+      <a href="project-detail.html" class="proj-full-card" data-category="commercial">
+        <div class="proj-img">
+          <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=700&q=80" alt="Office Interior" loading="lazy">
+          <span class="proj-tag" style="position:absolute;top:16px;left:16px;">Commercial</span>
+        </div>
+        <div class="proj-full-info">
+          <h3>TanzTech Office Tower</h3>
+          <p style="color:var(--text-light);font-size:14px;line-height:1.6;">Modern 8-floor corporate headquarters for a technology company with data center facilities.</p>
+          <div class="proj-meta">
+            <span><i class="fa-solid fa-location-dot fi"></i> Oyster Bay, DSM</span>
+            <span><i class="fa-solid fa-calendar"></i> 2023</span>
+            <span><i class="fa-solid fa-layer-group"></i> 8 Floors</span>
+          </div>
+        </div>
+      </a>
+
+      <a href="project-detail.html" class="proj-full-card" data-category="government">
+        <div class="proj-img">
+          <img src="https://images.unsplash.com/photo-1587829741301-dc798b83add3?w=700&q=80" alt="Health Center" loading="lazy">
+          <span class="proj-tag" style="position:absolute;top:16px;left:16px;">Government</span>
+        </div>
+        <div class="proj-full-info">
+          <h3>Arusha District Health Center</h3>
+          <p style="color:var(--text-light);font-size:14px;line-height:1.6;">A fully equipped district health center serving 50,000 residents with modern medical facilities.</p>
+          <div class="proj-meta">
+            <span><i class="fa-solid fa-location-dot fi"></i> Arusha</span>
+            <span><i class="fa-solid fa-calendar"></i> 2022</span>
+            <span> 50 Beds</span>
+          </div>
+        </div>
+      </a>
+
+    </div>
+
+    <!-- LOAD MORE -->
+    <div class="text-center mt-4">
+      <button class="btn-outline btn-lg" id="loadMoreBtn" onclick="loadMore()">
+         Load More Projects
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="final-cta section-pad">
+  <div class="container">
+    <div class="final-cta-inner">
+      <div class="section-label light">Start Building</div>
+      <h2 class="cta-title">Want a Project Like These?</h2>
+      <p>Tell us about your vision and we'll make it a reality.</p>
+      <div class="cta-buttons">
+        <a href="contact.html" class="btn-primary btn-lg">Start Your Project</a>
+        <a href="contact.html" class="btn-outline btn-lg white-outline">Get a Quote</a>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- FOOTER -->
+<footer class="footer" id="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="logo">
+          <img src="../logo.png" alt="Pyramid Logo" style="height:48px;width:auto;">
+          <div class="logo-text">
+            <span class="logo-main">PYRAMID</span>
+            <span class="logo-sub">Engineering & Construction</span>
+          </div>
+        </div>
+        <p data-i18n="footer.desc">Building Tanzania's future with expertise, integrity, and dedication to quality construction since 2008.</p>
+        <div class="footer-socials">
+          <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+          <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4 data-i18n="footer.services">Services</h4>
+        <ul>
+          <li><a href="services.html" data-i18n="svc.build">Building Construction</a></li>
+          <li><a href="services.html" data-i18n="svc.arch.short">Architecture & Design</a></li>
+          <li><a href="services.html" data-i18n="svc.consult">Consultation</a></li>
+          <li><a href="services.html" data-i18n="svc.reno.short">Renovation & Maintenance</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4 data-i18n="footer.company">Company</h4>
+        <ul>
+          <li><a href="about.html"   data-i18n="nav.about">About Us</a></li>
+          <li><a href="projects.html" data-i18n="nav.projects">Projects</a></li>
+          <li><a href="blog.html"    data-i18n="nav.blog">Blog</a></li>
+          <li><a href="contact.html" data-i18n="nav.contact">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4 data-i18n="footer.contact">Contact Us</h4>
+        <div class="footer-contact-item">
+          <i class="fa-solid fa-envelope fi"></i>
+          <a href="mailto:pyramid.constructor.ltd@gmail.com">pyramid.constructor.ltd@gmail.com</a>
+        </div>
+        <div class="footer-contact-item">
+          <i class="fa-solid fa-phone fi"></i>
+          <a href="tel:+255757744555">0757 744 555</a>
+        </div>
+        <div class="footer-contact-item">
+          <i class="fa-brands fa-whatsapp fi"></i>
+          <a href="https://wa.me/255757744555?text=Hello%20Pyramid%20Engineering%2C%20I%20would%20like%20to%20inquire." target="_blank" data-i18n="footer.wa">WhatsApp Us</a>
+        </div>
+        <div class="footer-contact-item">
+          <i class="fa-solid fa-location-dot fi"></i>
+          <span data-i18n="footer.loc">Dar es Salaam, Tanzania</span>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 Pyramid Engineering & Construction LTD. <span data-i18n="footer.rights">All rights reserved.</span></p>
+      <div class="footer-bottom-links">
+        <a href="#" data-i18n="footer.privacy">Privacy Policy</a>
+        <a href="#" data-i18n="footer.terms">Terms of Service</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- WHATSAPP FLOATING BUTTON -->
+
+<a href="https://wa.me/255757744555?text=Hello%20Pyramid%20Engineering%2C%20I%20would%20like%20to%20inquire%20about%20your%20services." class="whatsapp-float" target="_blank" aria-label="Chat on WhatsApp">
+  <svg viewBox="0 0 24 24" fill="currentColor" width="28" height="28">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+  </svg>
+</a>
+
+<button class="back-top" id="backTop" aria-label="Back to top">
+  <i class="fa-solid fa-chevron-up"></i>
+</button>
+<script>window.PYRAMID_API_URL = 'http://localhost:5000/api';</script>
+<script src="api.js"></script>
+<script src="i18n.js"></script>
+<script src="main.js"></script>
+</body>
+</html>
