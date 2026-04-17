@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Project Detail – Pyramid Engineering & Construction LTD</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Lato:wght@300;400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    /* ── Project Detail Extras ── */
+    .project-hero {
+      height: 55vh;
+      min-height: 380px;
+      position: relative;
+      overflow: hidden;
+    }
+    .project-hero img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+    }
+    .project-hero-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(11,30,62,.85) 0%, rgba(11,30,62,.3) 60%, transparent 100%);
+    }
+    .project-hero-content {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      padding: 2.5rem var(--container-pad);
+      max-width: var(--container-max);
+      margin: 0 auto;
+    }
+    .project-category-badge {
+      display: inline-flex; align-items: center; gap: .4rem;
+      background: var(--orange); color: #fff;
+      font-family: var(--font-display); font-size: .75rem; font-weight: 700;
+      letter-spacing: .1em; text-transform: uppercase;
+      padding: .3rem .8rem; border-radius: 2px; margin-bottom: 1rem;
+    }
+    .project-hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 900; color: #fff;
+      line-height: 1.05; text-transform: uppercase;
+    }
+
+    /* Layout */
+    .project-detail-layout {
+      display: grid;
+      grid-template-columns: 1fr 340px;
+      gap: 3rem;
+      align-items: start;
+      padding: 4rem 0;
+    }
+    @media (max-width: 900px) {
+      .project-detail-layout { grid-template-columns: 1fr; }
+      .project-sidebar { order: -1; }
+    }
+
+    /* Gallery */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: .75rem;
+      margin-bottom: 2.5rem;
+    }
+    .gallery-grid img {
+      width: 100%; aspect-ratio: 4/3;
+      object-fit: cover; border-radius: 4px;
+      cursor: pointer; transition: transform .3s, opacity .3s;
+    }
+    .gallery-grid img:hover { transform: scale(1.03); opacity: .9; }
+    .gallery-grid img:first-child {
+      grid-column: span 3;
+      aspect-ratio: 16/7;
+    }
+    @media (max-width: 600px) {
+      .gallery-grid { grid-template-columns: 1fr 1fr; }
+      .gallery-grid img:first-child { grid-column: span 2; }
+    }
+
+    /* Lightbox */
+    .lightbox {
+      display: none; position: fixed; inset: 0; z-index: 9999;
+      background: rgba(0,0,0,.92);
+      align-items: center; justify-content: center;
+    }
+    .lightbox.active { display: flex; }
+    .lightbox img { max-width: 90vw; max-height: 85vh; border-radius: 4px; }
+    .lightbox-close {
+      position: absolute; top: 1.5rem; right: 1.5rem;
+      background: none; border: none; color: #fff; cursor: pointer;
+      font-size: 2rem; line-height: 1;
+    }
+
+    /* Description */
+    .project-description h2 {
+      font-family: var(--font-display);
+      font-size: 1.8rem; font-weight: 800; text-transform: uppercase;
+      color: var(--navy); margin-bottom: 1rem;
+    }
+    [data-theme="dark"] .project-description h2 { color: #fff; }
+    .project-description p {
+      color: var(--text-muted); line-height: 1.8; margin-bottom: 1rem;
+    }
+
+    /* Before/After */
+    .before-after-wrap {
+      margin: 2.5rem 0;
+    }
+    .before-after-wrap h3 {
+      font-family: var(--font-display);
+      font-size: 1.4rem; font-weight: 800; text-transform: uppercase;
+      color: var(--navy); margin-bottom: 1rem;
+    }
+    [data-theme="dark"] .before-after-wrap h3 { color: #fff; }
+    .ba-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;
+    }
+    .ba-item { position: relative; }
+    .ba-item img {
+      width: 100%; aspect-ratio: 4/3; object-fit: cover; border-radius: 4px;
+    }
+    .ba-label {
+      position: absolute; top: .75rem; left: .75rem;
+      font-family: var(--font-display); font-size: .75rem; font-weight: 700;
+      letter-spacing: .08em; text-transform: uppercase;
+      padding: .25rem .6rem; border-radius: 2px; color: #fff;
+    }
+    .ba-label.before { background: #555; }
+    .ba-label.after { background: var(--orange); }
+
+    /* Sidebar */
+    .project-sidebar {
+      position: sticky; top: 100px;
+    }
+    .sidebar-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+      margin-bottom: 1.5rem;
+    }
+    .sidebar-card-header {
+      background: var(--navy); color: #fff;
+      font-family: var(--font-display);
+      font-size: .85rem; font-weight: 700; letter-spacing: .1em;
+      text-transform: uppercase; padding: .9rem 1.25rem;
+    }
+    .sidebar-specs { padding: 0; list-style: none; }
+    .sidebar-specs li {
+      display: flex; align-items: center; gap: .75rem;
+      padding: .9rem 1.25rem;
+      border-bottom: 1px solid var(--border);
+      font-size: .9rem; color: var(--text-muted);
+    }
+    .sidebar-specs li:last-child { border-bottom: none; }
+    .sidebar-specs li svg { color: var(--orange); flex-shrink: 0; }
+    .spec-label { font-weight: 700; color: var(--text); margin-right: auto; }
+    .spec-val { color: var(--text-muted); text-align: right; }
+
+    .sidebar-cta-card {
+      background: var(--navy); border-radius: 8px;
+      padding: 1.75rem 1.25rem; text-align: center;
+    }
+    .sidebar-cta-card h4 {
+      font-family: var(--font-display); font-size: 1.25rem;
+      font-weight: 800; text-transform: uppercase; color: #fff;
+      margin-bottom: .5rem;
+    }
+    .sidebar-cta-card p {
+      color: rgba(255,255,255,.6); font-size: .875rem;
+      line-height: 1.6; margin-bottom: 1.25rem;
+    }
+    .sidebar-cta-card .btn-primary { width: 100%; justify-content: center; margin-bottom: .75rem; }
+    .sidebar-cta-card .btn-whatsapp {
+      display: flex; align-items: center; justify-content: center; gap: .5rem;
+      width: 100%; padding: .75rem 1.5rem;
+      background: #25D366; color: #fff;
+      border-radius: 4px; font-weight: 700; font-size: .875rem;
+      text-decoration: none; transition: background .2s;
+    }
+    .sidebar-cta-card .btn-whatsapp:hover { background: #1da851; }
+
+    /* Related projects */
+    .related-section { padding: 4rem 0; border-top: 1px solid var(--border); }
+    .related-section h2 {
+      font-family: var(--font-display); font-size: 2rem;
+      font-weight: 900; text-transform: uppercase; color: var(--navy);
+      margin-bottom: 2rem;
+    }
+    [data-theme="dark"] .related-section h2 { color: #fff; }
+    .related-grid {
+      display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem;
+    }
+    @media (max-width: 700px) { .related-grid { grid-template-columns: 1fr 1fr; } }
+    .related-card { border-radius: 6px; overflow: hidden; position: relative; }
+    .related-card img { width: 100%; aspect-ratio: 4/3; object-fit: cover; display: block; transition: transform .4s; }
+    .related-card:hover img { transform: scale(1.05); }
+    .related-card-info {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      background: linear-gradient(to top, rgba(11,30,62,.9), transparent);
+      padding: 1.5rem .75rem .75rem;
+    }
+    .related-card-info span {
+      font-family: var(--font-display); color: #fff;
+      font-size: .95rem; font-weight: 700; text-transform: uppercase;
+      display: block;
+    }
+    .related-card-info small { color: var(--orange); font-size: .75rem; font-weight: 600; text-transform: uppercase; letter-spacing: .08em; }
+    .related-card a { position: absolute; inset: 0; }
+
+    /* CTA Banner */
+    .project-cta-banner {
+      background: var(--orange);
+      border-radius: 8px;
+      padding: 3rem 2.5rem;
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 2rem; flex-wrap: wrap;
+      margin: 3rem 0;
+    }
+    .project-cta-banner h3 {
+      font-family: var(--font-display); font-size: clamp(1.5rem, 3vw, 2.25rem);
+      font-weight: 900; text-transform: uppercase; color: #fff;
+    }
+    .project-cta-banner p { color: rgba(255,255,255,.85); margin-top: .25rem; }
+    .btn-white {
+      display: inline-flex; align-items: center; gap: .5rem;
+      background: #fff; color: var(--orange);
+      font-family: var(--font-display); font-size: .95rem; font-weight: 800;
+      letter-spacing: .05em; text-transform: uppercase;
+      padding: .9rem 2rem; border-radius: 4px;
+      text-decoration: none; transition: all .2s; white-space: nowrap;
+    }
+    .btn-white:hover { background: var(--navy); color: #fff; }
+  </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar" id="navbar">
+  <div class="nav-inner container">
+    <a href="index.html" class="logo">
+      <img src="logo.png" alt="Pyramid Logo" style="height:60px;width:auto;object-fit:contain;">      <div class="logo-text">
+        <span class="logo-main">PYRAMID</span>
+        <span class="logo-sub">Engineering & Construction</span>
+      </div>    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html" class="nav-link" data-i18n="nav.home">Home</a></li>
+      <li><a href="services.html" class="nav-link" data-i18n="nav.services">Services</a></li>
+      <li><a href="projects.html" class="nav-link active" data-i18n="nav.projects">Projects</a></li>
+      <li><a href="about.html" class="nav-link" data-i18n="nav.about">About</a></li>
+      <li><a href="blog.html" class="nav-link" data-i18n="nav.blog">Blog</a></li>
+      <li><a href="contact.html" class="nav-link" data-i18n="nav.contact">Contact</a></li>
+    </ul>
+    <div class="nav-actions">
+      <div class="lang-switcher">
+        <button class="lang-btn active" onclick="setLang('en')">EN</button>
+        <button class="lang-btn" onclick="setLang('sw')">SW</button>
+        <button class="lang-btn" onclick="setLang('fr')">FR</button>
+      </div>
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme"><i class="fa-solid fa-moon" id="iconMoon"></i><i class="fa-solid fa-sun" id="iconSun" style="display:none"></i></button>
+      <a href="contact.html" class="btn-primary btn-sm" data-i18n="nav.quote">Get a Quote</a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Menu"><i class="fa-solid fa-bars" id="menuIcon"></i></button>
+    </div>
+  </div>
+</nav>
+
+<!-- MOBILE MENU BACKDROP -->
+<div class="mobile-menu-backdrop" id="mobileMenuBackdrop"></div>
+
+<!-- PROJECT HERO -->
+<section class="project-hero">
+  <img src="https://images.unsplash.com/photo-1486325212027-8081e485255e?w=1920&q=80" alt="Kariakoo Commercial Plaza" loading="eager">
+  <div class="project-hero-overlay"></div>
+  <div class="project-hero-content container">
+    <div class="project-category-badge">
+      <i class="fa-solid fa-building"></i> Commercial
+    </div>
+    <h1 class="project-hero-title">Kariakoo Commercial Plaza</h1>
+  </div>
+</section>
+
+<!-- BREADCRUMB -->
+<div style="background:var(--bg-card); border-bottom:1px solid var(--border); padding:.75rem 0;">
+  <div class="container" style="display:flex; align-items:center; gap:.5rem; font-size:.85rem; color:var(--text-muted);">
+    <a href="index.html" style="color:var(--text-muted); text-decoration:none;">Home</a>
+    <i class="fa-solid fa-chevron-right"></i>
+    <a href="projects.html" style="color:var(--text-muted); text-decoration:none;">Projects</a>
+    <i class="fa-solid fa-chevron-right"></i>
+    <span style="color:var(--orange);">Kariakoo Commercial Plaza</span>
+  </div>
+</div>
+
+<!-- MAIN CONTENT -->
+<main class="container">
+  <div class="project-detail-layout">
+
+    <!-- LEFT: Main Content -->
+    <div class="project-main">
+
+      <!-- Gallery -->
+      <div class="gallery-grid" id="galleryGrid">
+        <img src="https://images.unsplash.com/photo-1486325212027-8081e485255e?w=1200&q=80" alt="Main exterior view" onclick="openLightbox(this.src)">
+        <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=600&q=80" alt="Construction progress" onclick="openLightbox(this.src)">
+        <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=600&q=80" alt="Interior framework" onclick="openLightbox(this.src)">
+        <img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=600&q=80" alt="Architectural detail" onclick="openLightbox(this.src)">
+        <img src="https://images.unsplash.com/photo-1590725121839-892b458a74fe?w=600&q=80" alt="Lobby interior" onclick="openLightbox(this.src)">
+        <img src="https://images.unsplash.com/photo-1497366811353-6870744d04b2?w=600&q=80" alt="Facade close-up" onclick="openLightbox(this.src)">
+        <img src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=600&q=80" alt="Night view" onclick="openLightbox(this.src)">
+      </div>
+
+      <!-- Description -->
+      <div class="project-description reveal">
+        <h2>Project Overview</h2>
+        <p>
+          The Kariakoo Commercial Plaza stands as one of Pyramid Engineering and Construction LTD's most ambitious commercial projects in Dar es Salaam. Commissioned by a private investment consortium, this 8-story mixed-use development combines retail ground-floor units, office floors, and a rooftop event venue — all designed to serve the vibrant Kariakoo business district.
+        </p>
+        <p>
+          Our team delivered full turnkey services: architectural planning and design, structural engineering, interior fit-out coordination, and MEP systems installation. The project demanded precision in foundation work given the high water table of the area, which our engineers addressed with deep bored piling and a reinforced raft foundation.
+        </p>
+        <p>
+          The facade features a contemporary curtain-wall glass system with an aluminium composite cladding accent band, chosen for both durability in Tanzania's coastal climate and the sleek, professional impression befitting a premium business address.
+        </p>
+      </div>
+
+      <!-- Before / After -->
+      <div class="before-after-wrap reveal">
+        <h3>Before &amp; After</h3>
+        <div class="ba-grid">
+          <div class="ba-item">
+            <img src="https://images.unsplash.com/photo-1535732820275-9ffd998cac22?w=800&q=75" alt="Site before construction">
+            <span class="ba-label before">Before</span>
+          </div>
+          <div class="ba-item">
+            <img src="https://images.unsplash.com/photo-1486325212027-8081e485255e?w=800&q=75" alt="Completed building">
+            <span class="ba-label after">After</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- CTA Banner -->
+      <div class="project-cta-banner reveal">
+        <div>
+          <h3>Build Something Similar?</h3>
+          <p>Let's discuss your commercial project. We'll provide a free consultation and cost estimate.</p>
+        </div>
+        <a href="contact.html" class="btn-white">
+          <i class="fa-solid fa-arrow-right"></i>
+          Start Your Project
+        </a>
+      </div>
+
+    </div><!-- /project-main -->
+
+    <!-- RIGHT: Sidebar -->
+    <aside class="project-sidebar">
+
+      <!-- Project Specs -->
+      <div class="sidebar-card">
+        <div class="sidebar-card-header">Project Specifications</div>
+        <ul class="sidebar-specs">
+          <li>
+            <i class="fa-solid fa-location-dot"></i>
+            <span class="spec-label">Location</span>
+            <span class="spec-val">Kariakoo, Dar es Salaam</span>
+          </li>
+          <li>
+            <i class="fa-solid fa-layer-group"></i>
+            <span class="spec-label">Type</span>
+            <span class="spec-val">Commercial – Mixed Use</span>
+          </li>
+          <li>
+            <i class="fa-solid fa-ruler"></i>
+            <span class="spec-label">Total Area</span>
+            <span class="spec-val">4,800 m²</span>
+          </li>
+          <li>
+            <i class="fa-solid fa-building"></i>
+            <span class="spec-label">Floors</span>
+            <span class="spec-val">8 Storeys + Basement</span>
+          </li>
+          <li>
+            <i class="fa-solid fa-calendar"></i>
+            <span class="spec-label">Timeline</span>
+            <span class="spec-val">28 Months</span>
+          </li>
+          <li>
+            <i class="fa-solid fa-circle-check"></i>
+            <span class="spec-label">Status</span>
+            <span class="spec-val" style="color:#22c55e; font-weight:700;">Completed</span>
+          </li>
+          <li>
+            <i class="fa-solid fa-users"></i>
+            <span class="spec-label">Client Type</span>
+            <span class="spec-val">Private Corporation</span>
+          </li>
+          <li>
+            <i class="fa-solid fa-money-bill"></i>
+            <span class="spec-label">Cost Range</span>
+            <span class="spec-val">TZS 2.1B – 2.4B</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Services Used -->
+      <div class="sidebar-card">
+        <div class="sidebar-card-header">Services Provided</div>
+        <ul class="sidebar-specs">
+          <li><i class="fa-solid fa-hard-hat"></i> <span>Building Construction</span></li>
+          <li><i class="fa-solid fa-drafting-compass"></i> <span>Architecture & Design</span></li>
+          <li><i class="fa-solid fa-comments"></i> <span>Project Consultation</span></li>
+          <li><i class="fa-solid fa-wrench"></i> <span>MEP Installation</span></li>
+        </ul>
+      </div>
+
+      <!-- CTA Card -->
+      <div class="sidebar-cta-card">
+        <h4>Start a Similar Project</h4>
+        <p>Get a free consultation and detailed estimate for your commercial or residential project.</p>
+        <a href="contact.html" class="btn-primary">
+          <i class="fa-solid fa-calculator"></i>
+          Estimate My Project
+        </a>
+        <a href="https://wa.me/255757744555?text=Hello%20Pyramid%20Engineering%2C%20I%20am%20interested%20in%20a%20commercial%20project%20similar%20to%20Kariakoo%20Plaza." class="btn-whatsapp" target="_blank">
+          <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Chat on WhatsApp
+        </a>
+      </div>
+
+    </aside>
+
+  </div><!-- /project-detail-layout -->
+
+  <!-- Related Projects -->
+  <section class="related-section reveal">
+    <h2>Related Projects</h2>
+    <div class="related-grid">
+      <div class="related-card">
+        <img src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=600&q=75" alt="Office Tower">
+        <div class="related-card-info">
+          <small>Commercial</small>
+          <span>Msasani Office Tower</span>
+        </div>
+        <a href="project-detail.html"></a>
+      </div>
+      <div class="related-card">
+        <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&q=75" alt="Luxury Villas">
+        <div class="related-card-info">
+          <small>Residential</small>
+          <span>Mikocheni Luxury Villas</span>
+        </div>
+        <a href="project-detail.html"></a>
+      </div>
+      <div class="related-card">
+        <img src="https://images.unsplash.com/photo-1590725121839-892b458a74fe?w=600&q=75" alt="Government Complex">
+        <div class="related-card-info">
+          <small>Government</small>
+          <span>TRA Regional Office Complex</span>
+        </div>
+        <a href="project-detail.html"></a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="footer" id="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="logo">
+          <img src="logo.png" alt="Pyramid Logo" style="height:60px;width:auto;object-fit:contain;">          <div class="logo-text">
+            <span class="logo-main">PYRAMID</span>
+            <span class="logo-sub">Engineering & Construction</span>
+          </div>        </div>
+        <p data-i18n="footer.desc">Building Tanzania's future with expertise, integrity, and dedication to quality construction since 2008.</p>
+        <div class="footer-socials">
+          <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+          <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4 data-i18n="footer.services">Services</h4>
+        <ul>
+          <li><a href="services.html" data-i18n="svc.build">Building Construction</a></li>
+          <li><a href="services.html" data-i18n="svc.arch.short">Architecture & Design</a></li>
+          <li><a href="services.html" data-i18n="svc.consult">Consultation</a></li>
+          <li><a href="services.html" data-i18n="svc.reno.short">Renovation & Maintenance</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4 data-i18n="footer.company">Company</h4>
+        <ul>
+          <li><a href="about.html"   data-i18n="nav.about">About Us</a></li>
+          <li><a href="projects.html" data-i18n="nav.projects">Projects</a></li>
+          <li><a href="blog.html"    data-i18n="nav.blog">Blog</a></li>
+          <li><a href="contact.html" data-i18n="nav.contact">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4 data-i18n="footer.contact">Contact Us</h4>
+        <div class="footer-contact-item">
+          <i class="fa-solid fa-envelope fi"></i>
+          <a href="mailto:pyramid.constructor.ltd@gmail.com">pyramid.constructor.ltd@gmail.com</a>
+        </div>
+        <div class="footer-contact-item">
+          <i class="fa-solid fa-phone fi"></i>
+          <a href="tel:+255757744555">0757 744 555</a>
+        </div>
+        <div class="footer-contact-item">
+          <i class="fa-brands fa-whatsapp fi"></i>
+          <a href="https://wa.me/255757744555?text=Hello%20Pyramid%20Engineering%2C%20I%20would%20like%20to%20inquire." target="_blank" data-i18n="footer.wa">WhatsApp Us</a>
+        </div>
+        <div class="footer-contact-item">
+          <i class="fa-solid fa-location-dot fi"></i>
+          <span data-i18n="footer.loc">Dar es Salaam, Tanzania</span>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 Pyramid Engineering & Construction LTD. <span data-i18n="footer.rights">All rights reserved.</span></p>
+      <div class="footer-bottom-links">
+        <a href="#" data-i18n="footer.privacy">Privacy Policy</a>
+        <a href="#" data-i18n="footer.terms">Terms of Service</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+  <img id="lightboxImg" src="" alt="Project image">
+</div>
+
+<!-- WhatsApp Float -->
+<!-- WHATSAPP FLOATING BUTTON -->
+
+<a href="https://wa.me/255757744555?text=Hello%20Pyramid%20Engineering%2C%20I%20would%20like%20to%20inquire%20about%20your%20services." class="whatsapp-float" target="_blank" aria-label="Chat on WhatsApp">
+  <svg viewBox="0 0 24 24" fill="currentColor" width="28" height="28">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+  </svg>
+</a>
+
+<button class="back-top" id="backTop" aria-label="Back to top">
+  <i class="fa-solid fa-chevron-up"></i>
+</button>
+<script>window.PYRAMID_API_URL = 'http://localhost:5000/api';</script>
+<script src="api.js"></script>
+<script src="i18n.js"></script>
+<script src="main.js"></script>
+</body>
+</html>
+

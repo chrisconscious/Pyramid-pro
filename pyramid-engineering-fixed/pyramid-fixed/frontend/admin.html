@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pyramid Admin Dashboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/quill@2.0.0/dist/quill.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/quill@2.0.0/dist/quill.snow.css" rel="stylesheet">
+  <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+
+<!-- LOGIN SCREEN -->
+<div id="login-screen" class="login-screen">
+  <div class="login-container">
+    <div class="login-header">
+      <img src="logo.png" alt="Pyramid Logo" style="height:60px;width:auto;margin-bottom:12px;">
+      <h1>Pyramid Admin</h1>
+      <p>Engineering &amp; Construction LTD</p>
+    </div>
+    <form id="login-form" class="login-form" novalidate>
+      <div class="form-group">
+        <label for="email">Email Address</label>
+        <input type="email" id="email" name="email" placeholder="admin@pyramid.co.tz" autocomplete="email" required>
+      </div>
+      <div class="form-group" style="position:relative;">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" placeholder="••••••••" autocomplete="current-password" required>
+        <button type="button" id="toggle-password" style="position:absolute;right:12px;top:38px;background:none;border:none;cursor:pointer;color:#888;">
+          <i class="fas fa-eye" id="eye-icon"></i>
+        </button>
+      </div>
+      <div id="login-error" class="error-message"></div>
+      <button type="submit" class="btn btn-primary btn-full" id="login-btn">
+        <span id="login-text">Sign In</span>
+        <span id="login-spinner" style="display:none;"><i class="fas fa-spinner fa-spin"></i></span>
+      </button>
+    </form>
+  </div>
+</div>
+
+<!-- MAIN APP -->
+<div id="app" class="app hidden">
+
+  <!-- SIDEBAR -->
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-header">
+      <div class="logo">
+        <img src="logo.png" alt="Pyramid" style="height:32px;width:auto;filter:brightness(0) invert(1);">
+        <span>PYRAMID</span>
+      </div>
+      <button id="sidebar-collapse" class="sidebar-collapse"><i class="fas fa-bars"></i></button>
+    </div>
+    <div class="sidebar-user">
+      <div class="user-avatar"><i class="fas fa-user"></i></div>
+      <div class="user-info">
+        <div class="user-name" id="user-name">Admin</div>
+        <div class="user-role" id="user-role">super_admin</div>
+      </div>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="nav-section">
+        <div class="nav-item active" data-route="dashboard"><i class="fas fa-chart-line"></i><span>Dashboard</span></div>
+        <div class="nav-item" data-route="services"><i class="fas fa-wrench"></i><span>Services</span></div>
+        <div class="nav-item" data-route="projects"><i class="fas fa-building"></i><span>Projects</span></div>
+        <div class="nav-item" data-route="blogs"><i class="fas fa-newspaper"></i><span>Blog</span></div>
+        <div class="nav-item" data-route="testimonials"><i class="fas fa-star"></i><span>Testimonials</span></div>
+        <div class="nav-item" data-route="team"><i class="fas fa-users"></i><span>Team</span></div>
+        <div class="nav-item" data-route="partners"><i class="fas fa-handshake"></i><span>Partners</span></div>
+        <div class="nav-item" data-route="messages"><i class="fas fa-envelope"></i><span>Messages</span><span class="badge" id="messages-badge"></span></div>
+      </div>
+      <div class="nav-divider"></div>
+      <div class="nav-section">
+        <div class="nav-item" data-route="media"><i class="fas fa-images"></i><span>Media Library</span></div>
+        <div class="nav-item" data-route="settings"><i class="fas fa-cog"></i><span>Settings</span></div>
+      </div>
+      <div class="nav-divider"></div>
+      <div class="nav-section">
+        <a href="index.html" target="_blank" class="nav-item external"><i class="fas fa-external-link-alt"></i><span>View Website</span></a>
+        <div class="nav-item" id="logout-btn"><i class="fas fa-sign-out-alt"></i><span>Logout</span></div>
+      </div>
+    </nav>
+  </aside>
+
+  <!-- TOPBAR -->
+  <header class="topbar">
+    <div class="topbar-left">
+      <button id="mobile-menu-btn" class="mobile-menu-btn"><i class="fas fa-bars"></i></button>
+      <h1 id="page-title">Dashboard</h1>
+    </div>
+    <div class="topbar-right">
+      <button id="theme-toggle" class="topbar-btn" title="Toggle theme"><i class="fas fa-moon"></i></button>
+      <div class="user-menu">
+        <div class="user-avatar-small"><i class="fas fa-user"></i></div>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN CONTENT -->
+  <main id="main-content" class="main-content">
+    <!-- Loaded dynamically -->
+  </main>
+</div>
+
+<!-- TOAST CONTAINER -->
+<div id="toast-container" class="toast-container"></div>
+
+<!-- CONFIRM MODAL -->
+<div id="confirm-modal" class="modal-overlay hidden">
+  <div class="modal confirm-modal">
+    <div class="modal-header">
+      <h3 id="confirm-title">Confirm Action</h3>
+      <button class="modal-close" onclick="closeConfirmModal()"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="modal-body"><p id="confirm-message">Are you sure?</p></div>
+    <div class="modal-footer">
+      <button class="btn btn-secondary" onclick="closeConfirmModal()">Cancel</button>
+      <button class="btn btn-danger" id="confirm-ok">Confirm</button>
+    </div>
+  </div>
+</div>
+
+<!-- CRUD MODAL -->
+<div id="crud-modal" class="modal-overlay hidden">
+  <div class="modal crud-modal">
+    <div class="modal-header">
+      <h3 id="crud-modal-title">Add Item</h3>
+      <button class="modal-close" onclick="closeCrudModal()"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="modal-body" id="crud-modal-body">
+      <!-- Form injected dynamically -->
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-secondary" onclick="closeCrudModal()">Cancel</button>
+      <button class="btn btn-primary" id="crud-save-btn" onclick="saveCrudItem()">Save</button>
+    </div>
+  </div>
+</div>
+
+<script src="admin-dashboard.js"></script>
+</body>
+</html>
+
+

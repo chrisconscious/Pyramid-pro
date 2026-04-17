@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>About Us — Pyramid Engineering & Construction LTD</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    /* ── About-specific styles ── */
+    .about-story { display:grid; grid-template-columns:1fr 1fr; gap:5rem; align-items:center; }
+    .about-story-img { position:relative; border-radius:4px; overflow:hidden; aspect-ratio:4/3; }
+    .about-story-img img { width:100%; height:100%; object-fit:cover; }
+    .about-story-img .badge-float {
+      position:absolute; bottom:2rem; left:-2rem;
+      background:var(--orange); color:#fff;
+      padding:1.2rem 1.6rem; border-radius:4px;
+      font-family:var(--font-display); font-size:3rem; font-weight:900; line-height:1;
+      text-align:center; box-shadow:0 8px 32px rgba(232,98,26,.4);
+    }
+    .about-story-img .badge-float span { display:block; font-size:.9rem; font-weight:400; letter-spacing:.05em; margin-top:.25rem; }
+    .about-story-text .section-label { margin-bottom:1rem; }
+    .about-story-text h2 { margin-bottom:1.5rem; }
+    .about-story-text p { color:var(--text-muted); line-height:1.8; margin-bottom:1.2rem; }
+    .about-story-text .story-highlights { display:flex; gap:2rem; margin-top:2rem; flex-wrap:wrap; }
+    .about-story-text .story-highlight { display:flex; align-items:flex-start; gap:.75rem; }
+    .about-story-text .story-highlight .hi-icon { width:40px; height:40px; border-radius:50%; background:var(--orange-10); display:flex; align-items:center; justify-content:center; color:var(--orange); flex-shrink:0; }
+
+    /* Mission / Vision */
+    .mv-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:2rem; }
+    .mv-card { background:var(--surface); border:1px solid var(--border); border-radius:8px; padding:2.5rem; transition:transform .3s,box-shadow .3s; }
+    .mv-card:hover { transform:translateY(-6px); box-shadow:0 16px 48px rgba(0,0,0,.1); }
+    .mv-card .mv-icon { width:56px; height:56px; border-radius:12px; display:flex; align-items:center; justify-content:center; margin-bottom:1.5rem; }
+    .mv-card.mission .mv-icon { background:rgba(232,98,26,.12); color:var(--orange); }
+    .mv-card.vision .mv-icon { background:rgba(11,30,62,.12); color:var(--navy); }
+    .mv-card.values .mv-icon { background:rgba(34,197,94,.12); color:#16a34a; }
+    .mv-card h3 { font-size:1.4rem; margin-bottom:.75rem; }
+    .mv-card p { color:var(--text-muted); line-height:1.7; font-size:.95rem; }
+    .mv-card ul { list-style:none; padding:0; margin:0; }
+    .mv-card ul li { color:var(--text-muted); font-size:.95rem; padding:.3rem 0; display:flex; align-items:center; gap:.6rem; }
+    .mv-card ul li::before { content:'▲'; color:var(--orange); font-size:.5rem; flex-shrink:0; }
+
+    /* Stats bar */
+    .stats-bar-alt { background:var(--navy); padding:4rem 0; }
+    .stats-bar-alt .stats-inner { display:grid; grid-template-columns:repeat(4,1fr); gap:2rem; text-align:center; }
+    .stats-bar-alt .stat-item .num { font-family:var(--font-display); font-size:3.5rem; font-weight:900; color:var(--orange); line-height:1; }
+    .stats-bar-alt .stat-item .label { color:rgba(255,255,255,.7); font-size:.9rem; margin-top:.5rem; }
+
+    /* Timeline */
+    .timeline { position:relative; padding-left:3rem; }
+    .timeline::before { content:''; position:absolute; left:0; top:0; bottom:0; width:2px; background:var(--border); }
+    .timeline-item { position:relative; padding-bottom:3rem; }
+    .timeline-item:last-child { padding-bottom:0; }
+    .timeline-dot { position:absolute; left:-3.35rem; top:.2rem; width:16px; height:16px; border-radius:50%; background:var(--orange); border:3px solid var(--bg); box-shadow:0 0 0 2px var(--orange); }
+    .timeline-year { font-family:var(--font-display); font-size:.85rem; font-weight:700; color:var(--orange); letter-spacing:.1em; margin-bottom:.25rem; }
+    .timeline-title { font-size:1.1rem; font-weight:700; margin-bottom:.5rem; }
+    .timeline-desc { color:var(--text-muted); font-size:.95rem; line-height:1.6; }
+    .timeline-split { display:grid; grid-template-columns:1fr 1fr; gap:5rem; align-items:start; }
+
+    /* Team */
+    .team-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:2rem; }
+    .team-card { background:var(--surface); border:1px solid var(--border); border-radius:8px; overflow:hidden; transition:transform .3s,box-shadow .3s; }
+    .team-card:hover { transform:translateY(-6px); box-shadow:0 16px 48px rgba(0,0,0,.1); }
+    .team-card:hover .team-img img { transform:scale(1.05); }
+    .team-img { aspect-ratio:3/3.5; overflow:hidden; }
+    .team-img img { width:100%; height:100%; object-fit:cover; transition:transform .5s; }
+    .team-info { padding:1.5rem; }
+    .team-name { font-size:1.1rem; font-weight:700; margin-bottom:.2rem; }
+    .team-role { font-size:.85rem; color:var(--orange); font-weight:600; letter-spacing:.05em; text-transform:uppercase; margin-bottom:.75rem; }
+    .team-bio { font-size:.875rem; color:var(--text-muted); line-height:1.6; }
+    .team-socials { display:flex; gap:.5rem; margin-top:1rem; }
+    .team-socials a { width:32px; height:32px; border-radius:50%; border:1px solid var(--border); display:flex; align-items:center; justify-content:center; color:var(--text-muted); transition:background .2s,color .2s; }
+    .team-socials a:hover { background:var(--orange); color:#fff; border-color:var(--orange); }
+
+    /* Certifications */
+    .cert-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:2rem; }
+    .cert-card { background:var(--surface); border:1px solid var(--border); border-radius:8px; padding:2rem; display:flex; align-items:flex-start; gap:1.5rem; transition:box-shadow .3s; }
+    .cert-card:hover { box-shadow:0 8px 32px rgba(0,0,0,.08); }
+    .cert-icon { width:56px; height:56px; border-radius:8px; background:var(--orange-10); color:var(--orange); display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+    .cert-body h4 { font-size:1rem; font-weight:700; margin-bottom:.3rem; }
+    .cert-body p { font-size:.875rem; color:var(--text-muted); line-height:1.5; }
+    .cert-body .cert-num { font-size:.8rem; color:var(--orange); font-weight:600; margin-top:.5rem; font-family:var(--font-display); letter-spacing:.05em; }
+
+    /* Partners */
+    .partners-grid { display:flex; flex-wrap:wrap; gap:1.5rem; align-items:center; justify-content:center; }
+    .partner-logo { background:var(--surface); border:1px solid var(--border); border-radius:8px; padding:1.2rem 2.4rem; display:flex; align-items:center; justify-content:center; min-width:140px; transition:box-shadow .3s; }
+    .partner-logo:hover { box-shadow:0 4px 16px rgba(0,0,0,.08); }
+    .partner-logo span { font-family:var(--font-display); font-weight:800; font-size:1.1rem; color:var(--text-muted); letter-spacing:.05em; }
+
+    @media(max-width:900px){
+      .about-story { grid-template-columns:1fr; gap:3rem; }
+      .about-story-img .badge-float { left:1rem; }
+      .mv-grid { grid-template-columns:1fr; }
+      .stats-bar-alt .stats-inner { grid-template-columns:repeat(2,1fr); }
+      .team-grid { grid-template-columns:repeat(2,1fr); }
+      .cert-grid { grid-template-columns:1fr; }
+      .timeline-split { grid-template-columns:1fr; gap:3rem; }
+    }
+    @media(max-width:600px){
+      .team-grid { grid-template-columns:1fr; }
+      .stats-bar-alt .stats-inner { grid-template-columns:1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="navbar" id="navbar">
+  <div class="nav-inner container">
+    <a href="index.html" class="logo">
+      <img src="logo.png" alt="Pyramid Logo" style="height:60px;width:auto;object-fit:contain;">      <div class="logo-text">
+        <span class="logo-main">PYRAMID</span>
+        <span class="logo-sub">Engineering & Construction</span>
+      </div>    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html" class="nav-link" data-i18n="nav.home">Home</a></li>
+      <li><a href="services.html" class="nav-link" data-i18n="nav.services">Services</a></li>
+      <li><a href="projects.html" class="nav-link" data-i18n="nav.projects">Projects</a></li>
+      <li><a href="about.html" class="nav-link active" data-i18n="nav.about">About</a></li>
+      <li><a href="blog.html" class="nav-link" data-i18n="nav.blog">Blog</a></li>
+      <li><a href="contact.html" class="nav-link" data-i18n="nav.contact">Contact</a></li>
+    </ul>
+    <div class="nav-actions">
+      <div class="lang-switcher">
+        <button class="lang-btn active" onclick="setLang('en')">EN</button>
+        <button class="lang-btn" onclick="setLang('sw')">SW</button>
+        <button class="lang-btn" onclick="setLang('fr')">FR</button>
+      </div>
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme"><i class="fa-solid fa-moon" id="iconMoon"></i><i class="fa-solid fa-sun" id="iconSun" style="display:none"></i></button>
+      <a href="contact.html" class="btn-primary btn-sm" data-i18n="nav.quote">Get a Quote</a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Menu"><i class="fa-solid fa-bars" id="menuIcon"></i></button>
+    </div>
+  </div>
+</nav>
+
+<!-- MOBILE MENU BACKDROP -->
+<div class="mobile-menu-backdrop" id="mobileMenuBackdrop"></div>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="container page-hero-content">
+    <div class="breadcrumb">
+      <a href="index.html">Home</a>
+      <span class="sep">/</span>
+      <span>About Us</span>
+    </div>
+    <div class="section-label light">Who We Are</div>
+    <h1>About Pyramid Engineering</h1>
+    <p>Over 15 years of building trust, delivering quality, and shaping Tanzania's skyline — one project at a time.</p>
+  </div>
+</section>
+
+<!-- OUR STORY -->
+<section class="section-pad">
+  <div class="container">
+    <div class="about-story reveal">
+      <div class="about-story-img">
+        <img src="https://images.unsplash.com/photo-1590856029826-c7a73142bbf1?w=900&q=80" alt="Pyramid Engineering team on site" loading="lazy">
+        <div class="badge-float">15+<span>Years of Excellence</span></div>
+      </div>
+      <div class="about-story-text">
+        <div class="section-label">Our Story</div>
+        <h2>From a Vision to Tanzania's Trusted Builder</h2>
+        <p>Pyramid Engineering and Construction LTD was founded in 2008 with a single mission: deliver exceptional construction services with transparency, precision, and pride. Starting with residential projects in Dar es Salaam, we rapidly grew into one of Tanzania's most recognized engineering firms.</p>
+        <p>Today, we serve individual homebuilders, corporate clients, and government institutions across Tanzania, bringing the same commitment to quality and accountability to every project — regardless of size or scope.</p>
+        <p>Our name reflects our philosophy: like a pyramid, every project we build stands on a strong foundation, rises with precision, and endures for generations.</p>
+        <div class="story-highlights">
+          <div class="story-highlight">
+            <div class="hi-icon"><i class="fa-solid fa-shield-halved"></i></div>
+            <div><strong>Licensed & Certified</strong><br><small style="color:var(--text-muted)">Registered with BRELA & ERB Tanzania</small></div>
+          </div>
+          <div class="story-highlight">
+            <div class="hi-icon"><i class="fa-solid fa-users"></i></div>
+            <div><strong>50+ Expert Staff</strong><br><small style="color:var(--text-muted)">Engineers, architects, and tradespeople</small></div>
+          </div>
+          <div class="story-highlight">
+            <div class="hi-icon"><i class="fa-solid fa-location-dot"></i></div>
+            <div><strong>Nationwide Reach</strong><br><small style="color:var(--text-muted)">Projects across all Tanzanian regions</small></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS BAR -->
+<div class="stats-bar-alt">
+  <div class="container">
+    <div class="stats-inner">
+      <div class="stat-item">
+        <div class="num counter" data-target="15">0</div>
+        <div class="label">Years of Experience</div>
+      </div>
+      <div class="stat-item">
+        <div class="num counter" data-target="320">0</div>
+        <div class="label">Projects Completed</div>
+      </div>
+      <div class="stat-item">
+        <div class="num counter" data-target="280">0</div>
+        <div class="label">Happy Clients</div>
+      </div>
+      <div class="stat-item">
+        <div class="num counter" data-target="98">0</div>
+        <div class="label">% Client Satisfaction</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MISSION / VISION / VALUES -->
+<section class="section-pad bg-alt">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-label">Our Foundation</div>
+      <h2>Mission, Vision & Values</h2>
+      <p>The principles that guide every decision, every design, and every build.</p>
+    </div>
+    <div class="mv-grid reveal">
+      <div class="mv-card mission">
+        <div class="mv-icon"><i class="fa-solid fa-bullseye"></i></div>
+        <h3>Our Mission</h3>
+        <p>To deliver superior engineering and construction services across Tanzania, combining modern technology, quality materials, and skilled workmanship to create structures that stand the test of time — and exceed client expectations every step of the way.</p>
+      </div>
+      <div class="mv-card vision">
+        <div class="mv-icon"><i class="fa-solid fa-eye"></i></div>
+        <h3>Our Vision</h3>
+        <p>To be East Africa's most trusted and innovative construction company — recognized for integrity, technical excellence, and transformative projects that improve communities and elevate the built environment across the region.</p>
+      </div>
+      <div class="mv-card values">
+        <div class="mv-icon"><i class="fa-solid fa-star"></i></div>
+        <h3>Core Values</h3>
+        <ul>
+          <li>Integrity in every contract and commitment</li>
+          <li>Quality without compromise</li>
+          <li>Transparency with clients and partners</li>
+          <li>Safety as a non-negotiable priority</li>
+          <li>Innovation in design and method</li>
+          <li>Community-centered development</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPANY HISTORY TIMELINE -->
+<section class="section-pad">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-label">Our Journey</div>
+      <h2>A Legacy Built Year by Year</h2>
+      <p>Key milestones that shaped who we are today.</p>
+    </div>
+    <div class="timeline-split reveal">
+      <div>
+        <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=700&q=80" alt="Construction history" loading="lazy" style="width:100%;border-radius:8px;aspect-ratio:4/3;object-fit:cover;">
+      </div>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-year">2008</div>
+          <div class="timeline-title">Company Founded</div>
+          <div class="timeline-desc">Pyramid Engineering was established in Dar es Salaam with a team of 8 engineers, focusing on residential construction in Kinondoni and Ilala districts.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-year">2012</div>
+          <div class="timeline-title">First Government Contract</div>
+          <div class="timeline-desc">Awarded our first major government infrastructure project — a 2km road rehabilitation project in Dodoma, cementing our credibility in public-sector work.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-year">2015</div>
+          <div class="timeline-title">Architecture Division Launched</div>
+          <div class="timeline-desc">Expanded services to include full Architecture Planning & Design, growing our team to 30+ professionals and opening a dedicated design studio.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-year">2019</div>
+          <div class="timeline-title">100th Project Milestone</div>
+          <div class="timeline-desc">Celebrated the completion of our 100th project — a 6-storey commercial complex in Kariakoo — marking a decade of sustainable growth.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-year">2023</div>
+          <div class="timeline-title">ISO Quality Certification</div>
+          <div class="timeline-desc">Received ISO 9001:2015 Quality Management System certification, reinforcing our commitment to international construction standards.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-year">2025</div>
+          <div class="timeline-title">300+ Projects Completed</div>
+          <div class="timeline-desc">Surpassed 300 completed projects across Tanzania, with an expanding portfolio of luxury residential, commercial, and government infrastructure developments.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section class="section-pad bg-alt">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-label">Our People</div>
+      <h2>Meet the Leadership Team</h2>
+      <p>Experienced professionals dedicated to delivering your vision with skill and integrity.</p>
+    </div>
+    <div class="team-grid reveal">
+      <div class="team-card">
+        <div class="team-img">
+          <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&q=80" alt="CEO" loading="lazy">
+        </div>
+        <div class="team-info">
+          <div class="team-name">Emmanuel Mwangi</div>
+          <div class="team-role">CEO & Founder</div>
+          <div class="team-bio">Civil engineer with 18 years of experience in large-scale infrastructure and commercial construction across East Africa.</div>
+          <div class="team-socials">
+            <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+            <a href="#"><i class="fa-solid fa-envelope"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="team-card">
+        <div class="team-img">
+          <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&q=80" alt="Chief Architect" loading="lazy">
+        </div>
+        <div class="team-info">
+          <div class="team-name">Amina Hassan</div>
+          <div class="team-role">Chief Architect</div>
+          <div class="team-bio">Award-winning architect specializing in sustainable design and modern Tanzanian aesthetics. Holds a Masters from University of Nairobi.</div>
+          <div class="team-socials">
+            <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+            <a href="#"><i class="fa-solid fa-envelope"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="team-card">
+        <div class="team-img">
+          <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&q=80" alt="Project Director" loading="lazy">
+        </div>
+        <div class="team-info">
+          <div class="team-name">James Okafor</div>
+          <div class="team-role">Project Director</div>
+          <div class="team-bio">PMP-certified project manager with expertise in government and commercial projects. Delivered over 80 projects on time and within budget.</div>
+          <div class="team-socials">
+            <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+            <a href="#"><i class="fa-solid fa-envelope"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="team-card">
+        <div class="team-img">
+          <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&q=80" alt="Head of Consultation" loading="lazy">
+        </div>
+        <div class="team-info">
+          <div class="team-name">Grace Kimani</div>
+          <div class="team-role">Head of Consultation</div>
+          <div class="team-bio">Construction consultant with 12 years guiding clients through budgeting, permits, material selection, and contractor coordination.</div>
+          <div class="team-socials">
+            <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+            <a href="#"><i class="fa-solid fa-envelope"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<section class="section-pad">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-label">Trust & Compliance</div>
+      <h2>Certifications & Registrations</h2>
+      <p>Our credentials ensure every project meets Tanzania's legal and quality standards.</p>
+    </div>
+    <div class="cert-grid reveal">
+      <div class="cert-card">
+        <div class="cert-icon"><i class="fa-solid fa-award"></i></div>
+        <div class="cert-body">
+          <h4>BRELA Registration</h4>
+          <p>Fully registered with the Business Registrations and Licensing Agency of Tanzania as a licensed construction company.</p>
+          <div class="cert-num">REG NO: 12345678</div>
+        </div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-icon"><i class="fa-solid fa-shield-halved"></i></div>
+        <div class="cert-body">
+          <h4>ERB Membership</h4>
+          <p>Registered member of the Engineers Registration Board of Tanzania, certifying our engineering staff's professional qualifications.</p>
+          <div class="cert-num">ERB MEM: ERB/2024/XXX</div>
+        </div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-icon"><i class="fa-solid fa-circle-check"></i></div>
+        <div class="cert-body">
+          <h4>ISO 9001:2015</h4>
+          <p>Quality Management System certification confirming our commitment to internationally recognized quality control in all construction activities.</p>
+          <div class="cert-num">CERT: ISO/QMS/2023/TZ</div>
+        </div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-icon"><i class="fa-solid fa-building"></i></div>
+        <div class="cert-body">
+          <h4>NCC Registration</h4>
+          <p>Registered with the National Construction Council of Tanzania — a requirement for all contractors tendering on government and large commercial projects.</p>
+          <div class="cert-num">NCC CLASS: I (Buildings & Civil Works)</div>
+        </div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-icon"><i width="28" height="28"></i></div>
+        <div class="cert-body">
+          <h4>OSHA Compliance</h4>
+          <p>All sites operate in full compliance with the Occupational Safety and Health Authority of Tanzania, ensuring worker safety at every level.</p>
+          <div class="cert-num">OSHA CERT: Valid 2025</div>
+        </div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-icon"><i width="28" height="28"></i></div>
+        <div class="cert-body">
+          <h4>TRA Tax Clearance</h4>
+          <p>Up-to-date Tax Clearance Certificate from the Tanzania Revenue Authority, confirming full legal and financial compliance.</p>
+          <div class="cert-num">TRA: Valid through 2025</div>
+        </div>
+      </div>
+    </div>
+    <!-- Download profile CTA -->
+    <div style="text-align:center;margin-top:3rem;" class="reveal">
+      <p style="color:var(--text-muted);margin-bottom:1rem;">Download our full company profile for your records or procurement process.</p>
+      <a href="#" class="btn-primary" style="display:inline-flex;align-items:center;gap:.6rem;">
+        <i width="18" height="18"></i>
+        Download Company Profile (PDF)
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- PARTNERS / CLIENTS -->
+<section class="section-pad bg-alt">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-label">Trusted By</div>
+      <h2>Our Clients & Partners</h2>
+      <p>We're proud to have served Tanzania's leading institutions and organizations.</p>
+    </div>
+    <div class="partners-grid reveal">
+      <div class="partner-logo"><span>TANROADS</span></div>
+      <div class="partner-logo"><span>NHC</span></div>
+      <div class="partner-logo"><span>NSSF</span></div>
+      <div class="partner-logo"><span>CRDB BANK</span></div>
+      <div class="partner-logo"><span>TBL</span></div>
+      <div class="partner-logo"><span>TTCL</span></div>
+      <div class="partner-logo"><span>TANESCO</span></div>
+      <div class="partner-logo"><span>DAWASCO</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final-cta section-pad" id="start">
+  <div class="container">
+    <div class="final-cta-inner">
+      <div class="section-label light" data-i18n="cta.label">Ready to Build?</div>
+      <h2 class="cta-title" data-i18n="cta.title">Start Your Project Today</h2>
+      <p data-i18n="cta.desc">Let's turn your vision into reality. Contact us for a free consultation and detailed project quote.</p>
+      <div class="cta-buttons">
+        <a href="contact.html" class="btn-primary btn-lg" data-i18n="cta.btn1">Start Your Project</a>
+        <a href="tel:+255757744555" class="btn-outline btn-lg white-outline">
+          <i class="fa-solid fa-phone"></i> 0757 744 555
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer" id="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="logo">
+          <img src="logo.png" alt="Pyramid Logo" style="height:60px;width:auto;object-fit:contain;">          <div class="logo-text">
+            <span class="logo-main">PYRAMID</span>
+            <span class="logo-sub">Engineering & Construction</span>
+          </div>        </div>
+        <p data-i18n="footer.desc">Building Tanzania's future with expertise, integrity, and dedication to quality construction since 2008.</p>
+        <div class="footer-socials">
+          <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+          <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4 data-i18n="footer.services">Services</h4>
+        <ul>
+          <li><a href="services.html" data-i18n="svc.build">Building Construction</a></li>
+          <li><a href="services.html" data-i18n="svc.arch.short">Architecture & Design</a></li>
+          <li><a href="services.html" data-i18n="svc.consult">Consultation</a></li>
+          <li><a href="services.html" data-i18n="svc.reno.short">Renovation & Maintenance</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4 data-i18n="footer.company">Company</h4>
+        <ul>
+          <li><a href="about.html"   data-i18n="nav.about">About Us</a></li>
+          <li><a href="projects.html" data-i18n="nav.projects">Projects</a></li>
+          <li><a href="blog.html"    data-i18n="nav.blog">Blog</a></li>
+          <li><a href="contact.html" data-i18n="nav.contact">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4 data-i18n="footer.contact">Contact Us</h4>
+        <div class="footer-contact-item">
+          <i class="fa-solid fa-envelope fi"></i>
+          <a href="mailto:pyramid.constructor.ltd@gmail.com">pyramid.constructor.ltd@gmail.com</a>
+        </div>
+        <div class="footer-contact-item">
+          <i class="fa-solid fa-phone fi"></i>
+          <a href="tel:+255757744555">0757 744 555</a>
+        </div>
+        <div class="footer-contact-item">
+          <i class="fa-brands fa-whatsapp fi"></i>
+          <a href="https://wa.me/255757744555?text=Hello%20Pyramid%20Engineering%2C%20I%20would%20like%20to%20inquire." target="_blank" data-i18n="footer.wa">WhatsApp Us</a>
+        </div>
+        <div class="footer-contact-item">
+          <i class="fa-solid fa-location-dot fi"></i>
+          <span data-i18n="footer.loc">Dar es Salaam, Tanzania</span>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 Pyramid Engineering & Construction LTD. <span data-i18n="footer.rights">All rights reserved.</span></p>
+      <div class="footer-bottom-links">
+        <a href="#" data-i18n="footer.privacy">Privacy Policy</a>
+        <a href="#" data-i18n="footer.terms">Terms of Service</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- WHATSAPP FLOATING BUTTON -->
+
+<a href="https://wa.me/255757744555?text=Hello%20Pyramid%20Engineering%2C%20I%20would%20like%20to%20inquire%20about%20your%20services." class="whatsapp-float" target="_blank" aria-label="Chat on WhatsApp">
+  <svg viewBox="0 0 24 24" fill="currentColor" width="28" height="28">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+  </svg>
+</a>
+
+<button class="back-top" id="backTop" aria-label="Back to top">
+  <i class="fa-solid fa-chevron-up"></i>
+</button>
+<script>window.PYRAMID_API_URL = 'http://localhost:5000/api';</script>
+<script src="api.js"></script>
+<script src="i18n.js"></script>
+<script src="main.js"></script>
+</body>
+</html>
+

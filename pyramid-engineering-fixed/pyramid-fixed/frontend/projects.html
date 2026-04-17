@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Projects — Pyramid Engineering &amp; Construction</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar" id="navbar">
+  <div class="nav-inner container">
+    <a href="index.html" class="logo">
+      <img src="logo.png" alt="Pyramid Logo" style="height:60px;width:auto;object-fit:contain;">      <div class="logo-text"><span class="logo-main">PYRAMID</span><span class="logo-sub">Engineering &amp; Construction</span></div>    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html"    class="nav-link">Home</a></li>
+      <li><a href="services.html" class="nav-link">Services</a></li>
+      <li><a href="projects.html" class="nav-link active">Projects</a></li>
+      <li><a href="about.html"    class="nav-link">About</a></li>
+      <li><a href="blog.html"     class="nav-link">Blog</a></li>
+      <li><a href="contact.html"  class="nav-link">Contact</a></li>
+    </ul>
+    <div class="nav-actions">
+      <div class="lang-switcher">
+        <button class="lang-btn active" onclick="setLang('en')">EN</button>
+        <button class="lang-btn" onclick="setLang('sw')">SW</button>
+        <button class="lang-btn" onclick="setLang('fr')">FR</button>
+      </div>
+      <button class="theme-toggle" id="themeToggle"><i class="fa-solid fa-moon" id="iconMoon"></i><i class="fa-solid fa-sun" id="iconSun" style="display:none"></i></button>
+      <a href="contact.html" class="btn-primary btn-sm">Get a Quote</a>
+      <button class="menu-toggle" id="menuToggle"><i class="fa-solid fa-bars" id="menuIcon"></i></button>
+    </div>
+  </div>
+</nav>
+<div class="mobile-menu-backdrop" id="mobileMenuBackdrop"></div>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="page-hero-content container">
+    <div class="page-hero-breadcrumb"><a href="index.html">Home</a> <i class="fa-solid fa-chevron-right"></i> <span>Projects</span></div>
+    <h1>Our Projects</h1>
+    <p>A showcase of our finest construction and engineering achievements across Tanzania.</p>
+  </div>
+</section>
+
+<!-- FILTER -->
+<section class="filter-section section-pad-sm">
+  <div class="container">
+    <div class="filter-tabs">
+      <button class="filter-tab active" data-cat="">All</button>
+      <button class="filter-tab" data-cat="residential">Residential</button>
+      <button class="filter-tab" data-cat="commercial">Commercial</button>
+      <button class="filter-tab" data-cat="government">Government</button>
+      <button class="filter-tab" data-cat="infrastructure">Infrastructure</button>
+      <button class="filter-tab" data-cat="renovation">Renovation</button>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS GRID -->
+<section class="section-pad">
+  <div class="container">
+    <div class="projects-full-grid" id="projects-full-grid">
+      <div class="project-card skeleton" style="min-height:260px"></div>
+      <div class="project-card skeleton" style="min-height:260px"></div>
+      <div class="project-card skeleton" style="min-height:260px"></div>
+      <div class="project-card skeleton" style="min-height:260px"></div>
+      <div class="project-card skeleton" style="min-height:260px"></div>
+      <div class="project-card skeleton" style="min-height:260px"></div>
+    </div>
+    <div id="projects-empty" style="display:none;text-align:center;padding:60px 20px;color:#888;">
+      <i class="fa-solid fa-building" style="font-size:48px;margin-bottom:16px;display:block;"></i>
+      <p>No projects found in this category.</p>
+    </div>
+    <!-- PAGINATION -->
+    <div id="projects-pagination" style="display:flex;justify-content:center;gap:8px;margin-top:40px;flex-wrap:wrap;"></div>
+  </div>
+</section>
+<!-- FOOTER -->
+<footer class="footer" id="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="logo">
+          <img src="logo.png" alt="Pyramid Logo" style="height:60px;width:auto;object-fit:contain;">          <div class="logo-text">
+            <span class="logo-main">PYRAMID</span>
+            <span class="logo-sub">Engineering & Construction</span>
+          </div>        </div>
+        <p data-i18n="footer.desc">Building Tanzania's future with expertise, integrity, and dedication to quality construction since 2008.</p>
+        <div class="footer-socials">
+          <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+          <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4 data-i18n="footer.services">Services</h4>
+        <ul>
+          <li><a href="services.html" data-i18n="svc.build">Building Construction</a></li>
+          <li><a href="services.html" data-i18n="svc.arch.short">Architecture & Design</a></li>
+          <li><a href="services.html" data-i18n="svc.consult">Consultation</a></li>
+          <li><a href="services.html" data-i18n="svc.reno.short">Renovation & Maintenance</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4 data-i18n="footer.company">Company</h4>
+        <ul>
+          <li><a href="about.html"   data-i18n="nav.about">About Us</a></li>
+          <li><a href="projects.html" data-i18n="nav.projects">Projects</a></li>
+          <li><a href="blog.html"    data-i18n="nav.blog">Blog</a></li>
+          <li><a href="contact.html" data-i18n="nav.contact">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4 data-i18n="footer.contact">Contact Us</h4>
+        <div class="footer-contact-item">
+          <i class="fa-solid fa-envelope fi"></i>
+          <a href="mailto:pyramid.constructor.ltd@gmail.com">pyramid.constructor.ltd@gmail.com</a>
+        </div>
+        <div class="footer-contact-item">
+          <i class="fa-solid fa-phone fi"></i>
+          <a href="tel:+255757744555">0757 744 555</a>
+        </div>
+        <div class="footer-contact-item">
+          <i class="fa-brands fa-whatsapp fi"></i>
+          <a href="https://wa.me/255757744555?text=Hello%20Pyramid%20Engineering%2C%20I%20would%20like%20to%20inquire." target="_blank" data-i18n="footer.wa">WhatsApp Us</a>
+        </div>
+        <div class="footer-contact-item">
+          <i class="fa-solid fa-location-dot fi"></i>
+          <span data-i18n="footer.loc">Dar es Salaam, Tanzania</span>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 Pyramid Engineering & Construction LTD. <span data-i18n="footer.rights">All rights reserved.</span></p>
+      <div class="footer-bottom-links">
+        <a href="#" data-i18n="footer.privacy">Privacy Policy</a>
+        <a href="#" data-i18n="footer.terms">Terms of Service</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<a href="https://wa.me/255757744555" class="whatsapp-float" target="_blank">
+  <svg viewBox="0 0 24 24" fill="currentColor" width="28" height="28"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+<button class="back-top" id="backTop"><i class="fa-solid fa-chevron-up"></i></button>
+
+<script>window.PYRAMID_API_URL = 'http://localhost:5000/api';</script>
+<script src="api.js"></script>
+<script src="i18n.js"></script>
+<script src="main.js"></script>
+<script>
+document.getElementById('footer-year3').textContent = new Date().getFullYear();
+let currentPage = 1, currentCat = '';
+
+document.addEventListener('DOMContentLoaded', () => {
+  loadProjects();
+  document.querySelectorAll('.filter-tab').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.filter-tab').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      currentCat  = btn.dataset.cat;
+      currentPage = 1;
+      loadProjects();
+    });
+  });
+});
+
+async function loadProjects() {
+  const grid  = document.getElementById('projects-full-grid');
+  const empty = document.getElementById('projects-empty');
+  grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:60px;font-size:28px;color:#E8621A;"><i class="fas fa-spinner fa-spin"></i></div>';
+
+  const params = { page: currentPage, limit: 9 };
+  if (currentCat) params.category = currentCat;
+
+  const result = await PyramidAPI.getProjects(params);
+  const rows   = result?.data || [];
+  const pag    = result?.pagination;
+
+  if (!rows.length) {
+    grid.innerHTML = '';
+    empty.style.display = '';
+    document.getElementById('projects-pagination').innerHTML = '';
+    return;
+  }
+
+  empty.style.display = 'none';
+  grid.innerHTML = rows.map(p => `
+    <div class="project-card reveal">
+      <img src="${p.cover_url || p.cover?.public_url || 'https://images.unsplash.com/photo-1486325212027-8081e485255e?w=600&q=80'}"
+           alt="${esc(p.title)}" loading="lazy"
+           onerror="this.src='https://images.unsplash.com/photo-1486325212027-8081e485255e?w=600&q=80'">
+      <div class="proj-overlay">
+        <span class="proj-tag">${esc(p.category||'Construction')}</span>
+        <h3>${esc(p.title)}</h3>
+        ${p.location ? `<p style="font-size:13px;opacity:0.8;margin-bottom:10px"><i class="fa-solid fa-location-dot"></i> ${esc(p.location)}</p>` : ''}
+        <a href="project-detail.html?id=${p.id}" class="btn-outline btn-sm white-outline">View Project</a>
+      </div>
+    </div>`).join('');
+
+  // Pagination
+  if (pag && pag.totalPages > 1) {
+    const pagEl = document.getElementById('projects-pagination');
+    pagEl.innerHTML = '';
+    for (let i = 1; i <= pag.totalPages; i++) {
+      const btn = document.createElement('button');
+      btn.textContent = i;
+      btn.className   = `btn ${i === currentPage ? 'btn-primary' : 'btn-outline'}`;
+      btn.style.minWidth = '40px';
+      btn.addEventListener('click', () => { currentPage = i; loadProjects(); window.scrollTo({top:0,behavior:'smooth'}); });
+      pagEl.appendChild(btn);
+    }
+  } else {
+    document.getElementById('projects-pagination').innerHTML = '';
+  }
+}
+
+function esc(s) { return s ? String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;') : ''; }
+</script>
+</body>
+</html>
+
+

@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pyramid Engineering &amp; Construction LTD</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar" id="navbar">
+  <div class="nav-inner container">
+    <a href="index.html" class="logo">
+      <img src="logo.png" alt="Pyramid Logo" style="height:60px;width:auto;object-fit:contain;">      <div class="logo-text">
+        <span class="logo-main">PYRAMID</span>
+        <span class="logo-sub">Engineering &amp; Construction</span>
+      </div>    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html"    class="nav-link active" data-i18n="nav.home">Home</a></li>
+      <li><a href="services.html" class="nav-link" data-i18n="nav.services">Services</a></li>
+      <li><a href="projects.html" class="nav-link" data-i18n="nav.projects">Projects</a></li>
+      <li><a href="about.html"    class="nav-link" data-i18n="nav.about">About</a></li>
+      <li><a href="blog.html"     class="nav-link" data-i18n="nav.blog">Blog</a></li>
+      <li><a href="contact.html"  class="nav-link" data-i18n="nav.contact">Contact</a></li>
+    </ul>
+    <div class="nav-actions">
+      <div class="lang-switcher">
+        <button class="lang-btn active" onclick="setLang('en')">EN</button>
+        <button class="lang-btn" onclick="setLang('sw')">SW</button>
+        <button class="lang-btn" onclick="setLang('fr')">FR</button>
+      </div>
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+        <i class="fa-solid fa-moon" id="iconMoon"></i>
+        <i class="fa-solid fa-sun"  id="iconSun" style="display:none"></i>
+      </button>
+      <a href="contact.html" class="btn-primary btn-sm" data-i18n="nav.quote">Get a Quote</a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Menu">
+        <i class="fa-solid fa-bars" id="menuIcon"></i>
+      </button>
+    </div>
+  </div>
+</nav>
+<div class="mobile-menu-backdrop" id="mobileMenuBackdrop"></div>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-video-wrap">
+    <video autoplay muted loop playsinline class="hero-video"
+      poster="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=1920&q=80">
+      <source src="background-construction.mp4" type="video/mp4">
+    </video>
+    <div class="hero-overlay"></div>
+  </div>
+  <div class="hero-content container">
+    <div class="hero-badge"><i class="fa-solid fa-award"></i><span data-i18n="hero.badge">Trusted Since 2008</span></div>
+    <h1 class="hero-title" data-i18n="hero.title">Building the Future,<br><em>Trusted &amp; Reliable</em></h1>
+    <p class="hero-sub" data-i18n="hero.sub">Pyramid Engineering and Construction LTD delivers world-class construction, architecture, and renovation services across Tanzania and beyond.</p>
+    <div class="hero-ctas">
+      <a href="contact.html" class="btn-primary btn-lg" data-i18n="hero.cta1">Get a Quote</a>
+      <a href="projects.html" class="btn-outline btn-lg white-outline" data-i18n="hero.cta2">View Projects</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat"><span class="stat-num" id="stat-years">15+</span><span class="stat-label" data-i18n="stat.exp">Years Experience</span></div>
+      <div class="stat-div"></div>
+      <div class="stat"><span class="stat-num" id="stat-projects">300+</span><span class="stat-label" data-i18n="stat.proj">Projects Done</span></div>
+      <div class="stat-div"></div>
+      <div class="stat"><span class="stat-num" id="stat-satisfaction">98%</span><span class="stat-label" data-i18n="stat.sat">Client Satisfaction</span></div>
+    </div>
+  </div>
+  <div class="hero-scroll-cue"><i class="fa-solid fa-chevron-down"></i></div>
+</section>
+
+<!-- WHO WE SERVE -->
+<section class="audience-section section-pad" id="audience">
+  <div class="container">
+    <div class="section-label" data-i18n="audience.label">Who We Serve</div>
+    <h2 class="section-title" data-i18n="audience.title">Tailored for Every Client</h2>
+    <div class="audience-grid">
+      <a href="services.html" class="audience-card">
+        <div class="aud-icon"><i class="fa-solid fa-house"></i></div>
+        <h3 data-i18n="audience.ind">Individual Homebuilders</h3>
+        <p data-i18n="audience.ind.desc">Dream home construction, renovation, and personal architectural planning.</p>
+        <span class="aud-link">Explore <i class="fa-solid fa-arrow-right"></i></span>
+      </a>
+      <a href="services.html" class="audience-card featured">
+        <div class="aud-icon"><i class="fa-solid fa-building"></i></div>
+        <h3 data-i18n="audience.corp">Companies &amp; Businesses</h3>
+        <p data-i18n="audience.corp.desc">Commercial buildings, office complexes, retail spaces, and industrial facilities.</p>
+        <span class="aud-link">Explore <i class="fa-solid fa-arrow-right"></i></span>
+      </a>
+      <a href="services.html" class="audience-card">
+        <div class="aud-icon"><i class="fa-solid fa-landmark"></i></div>
+        <h3 data-i18n="audience.gov">Government Projects</h3>
+        <p data-i18n="audience.gov.desc">Public infrastructure, institutional buildings, and large-scale government contracts.</p>
+        <span class="aud-link">Explore <i class="fa-solid fa-arrow-right"></i></span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- CORE SERVICES — DYNAMIC -->
+<section class="services-preview section-pad bg-dark-section" id="services-preview">
+  <div class="container">
+    <div class="section-label light" data-i18n="services.label">What We Do</div>
+    <h2 class="section-title light" data-i18n="services.title">Our Core Services</h2>
+    <div class="services-grid" id="services-grid">
+      <!-- Loaded dynamically -->
+      <div class="service-card skeleton"></div>
+      <div class="service-card skeleton"></div>
+      <div class="service-card skeleton"></div>
+      <div class="service-card skeleton"></div>
+    </div>
+    <div class="text-center mt-4">
+      <a href="services.html" class="btn-primary btn-lg" data-i18n="services.all">All Services</a>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURED PROJECTS — DYNAMIC -->
+<section class="projects-section section-pad" id="featured-projects">
+  <div class="container">
+    <div class="section-label" data-i18n="proj.label">Our Portfolio</div>
+    <div class="section-header-row">
+      <h2 class="section-title" data-i18n="proj.title">Featured Projects</h2>
+      <a href="projects.html" class="btn-outline" data-i18n="proj.viewall">View All Projects</a>
+    </div>
+    <div class="projects-grid" id="projects-grid">
+      <!-- Loaded dynamically -->
+      <div class="project-card large skeleton"></div>
+      <div class="project-card skeleton"></div>
+      <div class="project-card skeleton"></div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY CHOOSE US -->
+<section class="why-us section-pad bg-light-section" id="why-us">
+  <div class="container">
+    <div class="why-inner">
+      <div class="why-text">
+        <div class="section-label" data-i18n="why.label">Why Pyramid</div>
+        <h2 class="section-title" data-i18n="why.title">Built on Trust,<br>Driven by Excellence</h2>
+        <p data-i18n="why.desc">For over 15 years, Pyramid Engineering and Construction LTD has been at the forefront of Tanzania's construction industry — delivering quality, on time, within budget.</p>
+        <div class="why-features">
+          <div class="why-feat"><i class="fa-solid fa-circle-check"></i> <span data-i18n="why.f1">Licensed &amp; Certified Engineers</span></div>
+          <div class="why-feat"><i class="fa-solid fa-circle-check"></i> <span data-i18n="why.f2">Premium Quality Materials</span></div>
+          <div class="why-feat"><i class="fa-solid fa-circle-check"></i> <span data-i18n="why.f3">On-Time Delivery Guarantee</span></div>
+          <div class="why-feat"><i class="fa-solid fa-circle-check"></i> <span data-i18n="why.f4">Transparent Cost Estimates</span></div>
+          <div class="why-feat"><i class="fa-solid fa-circle-check"></i> <span data-i18n="why.f5">Post-Construction Support</span></div>
+        </div>
+        <a href="about.html" class="btn-primary" data-i18n="why.learn">Learn More About Us</a>
+      </div>
+      <div class="why-visual">
+        <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&q=80" alt="Construction Team" loading="lazy" class="why-img">
+        <div class="why-badge-float">
+          <div class="why-badge">
+            <span class="why-badge-num" id="why-years">15+</span>
+            <span data-i18n="stat.exp">Years Experience</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OUR PROCESS -->
+<section class="process-section section-pad" id="process">
+  <div class="container">
+    <div class="section-label" data-i18n="process.label">How We Work</div>
+    <h2 class="section-title" data-i18n="process.title">Our Process</h2>
+    <div class="process-steps">
+      <div class="process-step">
+        <div class="step-num">01</div><div class="step-icon"><i class="fa-solid fa-comments"></i></div>
+        <h3 data-i18n="process.s1">Consultation</h3>
+        <p data-i18n="process.s1.desc">We meet with you to understand your vision, budget, and timeline requirements.</p>
+      </div>
+      <div class="process-connector"><i class="fa-solid fa-arrow-right"></i></div>
+      <div class="process-step">
+        <div class="step-num">02</div><div class="step-icon"><i class="fa-solid fa-drafting-compass"></i></div>
+        <h3 data-i18n="process.s2">Planning &amp; Design</h3>
+        <p data-i18n="process.s2.desc">Our architects create detailed plans and 3D models tailored to your specifications.</p>
+      </div>
+      <div class="process-connector"><i class="fa-solid fa-arrow-right"></i></div>
+      <div class="process-step">
+        <div class="step-num">03</div><div class="step-icon"><i class="fa-solid fa-hard-hat"></i></div>
+        <h3 data-i18n="process.s3">Construction</h3>
+        <p data-i18n="process.s3.desc">Expert teams build with precision, using quality materials and proven techniques.</p>
+      </div>
+      <div class="process-connector"><i class="fa-solid fa-arrow-right"></i></div>
+      <div class="process-step">
+        <div class="step-num">04</div><div class="step-icon"><i class="fa-solid fa-key"></i></div>
+        <h3 data-i18n="process.s4">Delivery</h3>
+        <p data-i18n="process.s4.desc">Final inspection, handover, and ongoing support to ensure your satisfaction.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS — DYNAMIC -->
+<section class="testimonials-section section-pad" id="testimonials">
+  <div class="container">
+    <div class="section-label" data-i18n="testi.label">Client Voices</div>
+    <h2 class="section-title" data-i18n="testi.title">What Our Clients Say</h2>
+    <div class="testimonials-grid" id="testimonials-grid">
+      <!-- Loaded dynamically -->
+      <div class="testi-card skeleton" style="min-height:180px"></div>
+      <div class="testi-card skeleton" style="min-height:180px"></div>
+      <div class="testi-card skeleton" style="min-height:180px"></div>
+    </div>
+  </div>
+</section>
+
+<!-- PARTNERS — DYNAMIC -->
+<section class="partners-section" id="partners">
+  <div class="container">
+    <p class="partners-label" data-i18n="partners.label">Trusted by leading organizations</p>
+    <div class="partners-row" id="partners-row">
+      <!-- Loaded dynamically -->
+      <div class="partner-logo skeleton" style="width:100px;height:32px"></div>
+      <div class="partner-logo skeleton" style="width:80px;height:32px"></div>
+      <div class="partner-logo skeleton" style="width:120px;height:32px"></div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final-cta section-pad" id="start">
+  <div class="container">
+    <div class="final-cta-inner">
+      <div class="section-label light" data-i18n="cta.label">Ready to Build?</div>
+      <h2 class="cta-title" data-i18n="cta.title">Start Your Project Today</h2>
+      <p data-i18n="cta.desc">Let's turn your vision into reality. Contact us for a free consultation and detailed project quote.</p>
+      <div class="cta-buttons">
+        <a href="contact.html" class="btn-primary btn-lg" data-i18n="cta.btn1">Start Your Project</a>
+        <a href="tel:+255757744555" class="btn-outline btn-lg white-outline">
+          <i class="fa-solid fa-phone"></i> <span id="cta-phone">0757 744 555</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer" id="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="logo">
+          <img src="logo.png" alt="Pyramid Logo" style="height:60px;width:auto;object-fit:contain;">          <div class="logo-text">
+            <span class="logo-main">PYRAMID</span>
+            <span class="logo-sub">Engineering & Construction</span>
+          </div>        </div>
+        <p data-i18n="footer.desc">Building Tanzania's future with expertise, integrity, and dedication to quality construction since 2008.</p>
+        <div class="footer-socials">
+          <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+          <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4 data-i18n="footer.services">Services</h4>
+        <ul>
+          <li><a href="services.html" data-i18n="svc.build">Building Construction</a></li>
+          <li><a href="services.html" data-i18n="svc.arch.short">Architecture & Design</a></li>
+          <li><a href="services.html" data-i18n="svc.consult">Consultation</a></li>
+          <li><a href="services.html" data-i18n="svc.reno.short">Renovation & Maintenance</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4 data-i18n="footer.company">Company</h4>
+        <ul>
+          <li><a href="about.html"   data-i18n="nav.about">About Us</a></li>
+          <li><a href="projects.html" data-i18n="nav.projects">Projects</a></li>
+          <li><a href="blog.html"    data-i18n="nav.blog">Blog</a></li>
+          <li><a href="contact.html" data-i18n="nav.contact">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4 data-i18n="footer.contact">Contact Us</h4>
+        <div class="footer-contact-item">
+          <i class="fa-solid fa-envelope fi"></i>
+          <a href="mailto:pyramid.constructor.ltd@gmail.com">pyramid.constructor.ltd@gmail.com</a>
+        </div>
+        <div class="footer-contact-item">
+          <i class="fa-solid fa-phone fi"></i>
+          <a href="tel:+255757744555">0757 744 555</a>
+        </div>
+        <div class="footer-contact-item">
+          <i class="fa-brands fa-whatsapp fi"></i>
+          <a href="https://wa.me/255757744555?text=Hello%20Pyramid%20Engineering%2C%20I%20would%20like%20to%20inquire." target="_blank" data-i18n="footer.wa">WhatsApp Us</a>
+        </div>
+        <div class="footer-contact-item">
+          <i class="fa-solid fa-location-dot fi"></i>
+          <span data-i18n="footer.loc">Dar es Salaam, Tanzania</span>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 Pyramid Engineering & Construction LTD. <span data-i18n="footer.rights">All rights reserved.</span></p>
+      <div class="footer-bottom-links">
+        <a href="#" data-i18n="footer.privacy">Privacy Policy</a>
+        <a href="#" data-i18n="footer.terms">Terms of Service</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+<!-- WHATSAPP BUTTON -->
+<a id="whatsapp-btn" href="https://wa.me/255757744555?text=Hello%20Pyramid%20Engineering%2C%20I%20would%20like%20to%20inquire%20about%20your%20services." class="whatsapp-float" target="_blank" aria-label="Chat on WhatsApp">
+  <svg viewBox="0 0 24 24" fill="currentColor" width="28" height="28">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+  </svg>
+</a>
+
+<!-- AI CHAT -->
+<div class="chat-widget" id="chatWidget">
+  <button class="chat-toggle" id="chatToggle" aria-label="Open chat"><i class="fa-solid fa-robot"></i></button>
+  <div class="chat-panel" id="chatPanel">
+    <div class="chat-header">
+      <div class="chat-avatar"><i class="fa-solid fa-robot"></i></div>
+      <div>
+        <strong data-i18n="chat.title">Pyramid Assistant</strong>
+        <span class="chat-status" data-i18n="chat.status">Online — Ask me anything</span>
+      </div>
+      <button class="chat-close" id="chatClose"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="chat-messages" id="chatMessages">
+      <div class="chat-msg bot">Hello! I'm the Pyramid Engineering assistant. How can I help you today?</div>
+      <div class="chat-quick-btns">
+        <button onclick="chatQuick('services')">Our Services</button>
+        <button onclick="chatQuick('quote')">Get a Quote</button>
+        <button onclick="chatQuick('contact')">Contact Us</button>
+      </div>
+    </div>
+    <div class="chat-input-row">
+      <input type="text" id="chatInput" placeholder="Type your question...">
+      <button id="chatSend" onclick="sendChat()"><i class="fa-solid fa-paper-plane"></i></button>
+    </div>
+  </div>
+</div>
+
+<button class="back-top" id="backTop" aria-label="Back to top"><i class="fa-solid fa-chevron-up"></i></button>
+
+<script>window.PYRAMID_API_URL = 'http://localhost:5000/api';</script>
+<script src="api.js"></script>
+<script src="i18n.js"></script>
+<script src="main.js"></script>
+<script>
+// ============================================================
+//  INDEX PAGE — Dynamic content loader
+// ============================================================
+document.addEventListener('DOMContentLoaded', async () => {
+  document.getElementById('footer-year').textContent = new Date().getFullYear();
+
+  // Load all sections in parallel
+  await Promise.allSettled([
+    loadSettings(),
+    loadServices(),
+    loadFeaturedProjects(),
+    loadTestimonials(),
+    loadPartners(),
+  ]);
+});
+
+async function loadSettings() {
+  const settings = await PyramidAPI.getSettings();
+  if (!settings) return;
+
+  const get = (key) => {
+    if (settings[key]) return settings[key].value || '';
+    return '';
+  };
+
+  const years    = get('years_experience');
+  const projects = get('projects_count');
+  const sat      = get('satisfaction_pct');
+  const phone    = get('contact_phone');
+  const email    = get('contact_email');
+  const address  = get('contact_address');
+  const wa       = get('whatsapp_number');
+  const fb       = get('facebook_url');
+  const li       = get('linkedin_url');
+  const ig       = get('instagram_url');
+
+  if (years)    { setTxt('stat-years', years + '+'); setTxt('why-years', years + '+'); }
+  if (projects) setTxt('stat-projects', projects + '+');
+  if (sat)      setTxt('stat-satisfaction', sat + '%');
+
+  if (phone) {
+    const phoneEl = document.getElementById('footer-phone');
+    if (phoneEl) { phoneEl.textContent = phone; phoneEl.href = 'tel:' + phone; }
+    const ctaPhone = document.getElementById('cta-phone');
+    if (ctaPhone) ctaPhone.textContent = phone;
+  }
+  if (email) {
+    const emailEl = document.getElementById('footer-email');
+    if (emailEl) { emailEl.textContent = email; emailEl.href = 'mailto:' + email; }
+  }
+  if (address) {
+    const addrEl = document.getElementById('footer-address');
+    if (addrEl) addrEl.textContent = address;
+  }
+  if (wa) {
+    const waLink = 'https://wa.me/' + wa.replace(/[^0-9]/g,'') + '?text=Hello%20Pyramid%20Engineering%2C%20I%20would%20like%20to%20inquire.';
+    const waBtn  = document.getElementById('whatsapp-btn');
+    const waFoot = document.getElementById('footer-whatsapp');
+    if (waBtn)  waBtn.href  = waLink;
+    if (waFoot) waFoot.href = waLink;
+  }
+  if (fb) { const el = document.getElementById('social-facebook'); if (el) el.href = fb; }
+  if (li) { const el = document.getElementById('social-linkedin');  if (el) el.href = li; }
+  if (ig) { const el = document.getElementById('social-instagram'); if (el) el.href = ig; }
+}
+
+async function loadServices() {
+  const grid = document.getElementById('services-grid');
+  if (!grid) return;
+
+  const services = await PyramidAPI.getServices();
+
+  if (!services || !services.length) {
+    grid.innerHTML = `
+      <a href="services.html" class="service-card"><div class="svc-icon-wrap"><i class="fa-solid fa-hard-hat"></i></div><h3>Building Construction</h3><p>Full-cycle construction from foundation to finishing.</p><div class="svc-arrow"><i class="fa-solid fa-arrow-up-right-from-square"></i></div></a>
+      <a href="services.html" class="service-card"><div class="svc-icon-wrap"><i class="fa-solid fa-drafting-compass"></i></div><h3>Architecture &amp; Design</h3><p>Innovative architectural designs that blend function and aesthetics.</p><div class="svc-arrow"><i class="fa-solid fa-arrow-up-right-from-square"></i></div></a>
+      <a href="services.html" class="service-card"><div class="svc-icon-wrap"><i class="fa-solid fa-comments"></i></div><h3>Consultation</h3><p>Expert project consultation and engineering advice.</p><div class="svc-arrow"><i class="fa-solid fa-arrow-up-right-from-square"></i></div></a>
+      <a href="services.html" class="service-card"><div class="svc-icon-wrap"><i class="fa-solid fa-wrench"></i></div><h3>Renovation &amp; Maintenance</h3><p>Breathe new life into existing structures.</p><div class="svc-arrow"><i class="fa-solid fa-arrow-up-right-from-square"></i></div></a>`;
+    return;
+  }
+
+  const icons = ['fa-hard-hat','fa-drafting-compass','fa-comments','fa-wrench','fa-building','fa-paint-roller','fa-road','fa-tree'];
+
+  grid.innerHTML = services.slice(0, 6).map((s, i) => `
+    <a href="services.html" class="service-card">
+      <div class="svc-icon-wrap"><i class="fa-solid ${icons[i % icons.length]}"></i></div>
+      <h3>${esc(s.title)}</h3>
+      <p>${esc(s.short_desc || '')}</p>
+      <div class="svc-arrow"><i class="fa-solid fa-arrow-up-right-from-square"></i></div>
+    </a>`).join('');
+}
+
+async function loadFeaturedProjects() {
+  const grid = document.getElementById('projects-grid');
+  if (!grid) return;
+
+  const projects = await PyramidAPI.getFeaturedProjects();
+
+  const fallback = [
+    { title:'Dar es Salaam Business Hub', category:'Commercial', cover_url:'https://images.unsplash.com/photo-1486325212027-8081e485255e?w=800&q=80', large:true },
+    { title:'Luxury Villa, Mikocheni',    category:'Residential', cover_url:'https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=600&q=80' },
+    { title:'Regional Admin Block, Dodoma', category:'Government', cover_url:'https://images.unsplash.com/photo-1523217582562-09d0def993a6?w=600&q=80' },
+  ];
+
+  const items = (projects && projects.length) ? projects.slice(0, 6) : fallback;
+
+  grid.innerHTML = items.map((p, i) => `
+    <div class="project-card ${i === 0 ? 'large' : ''}">
+      <img src="${p.cover_url || p.cover?.public_url || 'https://images.unsplash.com/photo-1486325212027-8081e485255e?w=800&q=80'}"
+           alt="${esc(p.title)}" loading="lazy"
+           onerror="this.src='https://images.unsplash.com/photo-1486325212027-8081e485255e?w=800&q=80'">
+      <div class="proj-overlay">
+        <span class="proj-tag">${esc(p.category || 'Construction')}</span>
+        <h3>${esc(p.title)}</h3>
+        <a href="project-detail.html?id=${p.id || ''}" class="btn-outline btn-sm white-outline">View Project</a>
+      </div>
+    </div>`).join('');
+}
+
+async function loadTestimonials() {
+  const grid = document.getElementById('testimonials-grid');
+  if (!grid) return;
+
+  const testimonials = await PyramidAPI.getTestimonials();
+
+  if (!testimonials || !testimonials.length) {
+    grid.innerHTML = `
+      <div class="testi-card"><div class="testi-stars">★★★★★</div><p>"Pyramid transformed my vision into reality. The craftsmanship is exceptional, and the team delivered on time."</p><div class="testi-author"><img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=60&h=60&fit=crop" alt="James Mwangi" loading="lazy"><div><strong>James Mwangi</strong><span>Homeowner, Dar es Salaam</span></div></div></div>
+      <div class="testi-card featured-testi"><div class="testi-stars">★★★★★</div><p>"As a company, we needed a contractor we could trust. Pyramid delivered beyond expectations."</p><div class="testi-author"><img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=60&h=60&fit=crop" alt="Sarah Kilimba" loading="lazy"><div><strong>Sarah Kilimba</strong><span>CEO, TanzTech Solutions</span></div></div></div>
+      <div class="testi-card"><div class="testi-stars">★★★★★</div><p>"The renovation was handled with utmost professionalism. Budget was respected, quality was outstanding."</p><div class="testi-author"><img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=60&h=60&fit=crop" alt="Dr. Hamisi Ally" loading="lazy"><div><strong>Dr. Hamisi Ally</strong><span>Regional Commissioner, Dodoma</span></div></div></div>`;
+    return;
+  }
+
+  grid.innerHTML = testimonials.slice(0, 3).map((t, i) => `
+    <div class="testi-card ${i === 1 ? 'featured-testi' : ''}">
+      <div class="testi-stars">${'★'.repeat(parseInt(t.rating) || 5)}</div>
+      <p>"${esc(t.body)}"</p>
+      <div class="testi-author">
+        ${t.avatar_url ? `<img src="${t.avatar_url}" alt="${esc(t.client_name)}" loading="lazy" onerror="this.style.display='none'">` : ''}
+        <div><strong>${esc(t.client_name)}</strong><span>${esc(t.client_role || '')}</span></div>
+      </div>
+    </div>`).join('');
+}
+
+async function loadPartners() {
+  const row = document.getElementById('partners-row');
+  if (!row) return;
+
+  const partners = await PyramidAPI.getPartners();
+
+  if (!partners || !partners.length) {
+    row.innerHTML = ['TANROADS','NHC','NSSF','CRDB','Tanzania Breweries','TTCL']
+      .map(p => `<div class="partner-logo">${p}</div>`).join('');
+    return;
+  }
+
+  row.innerHTML = partners.map(p => `
+    <div class="partner-logo">
+      ${p.logo_url ? `<img src="${p.logo_url}" alt="${esc(p.name)}" style="max-height:40px;max-width:100px;object-fit:contain;" onerror="this.parentElement.textContent='${esc(p.name)}'">` : esc(p.name)}
+    </div>`).join('');
+}
+
+function esc(str) {
+  if (!str) return '';
+  return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+function setTxt(id, val) {
+  const el = document.getElementById(id);
+  if (el) el.textContent = val;
+}
+</script>
+</body>
+</html>
+
+
