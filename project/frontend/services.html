@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Services — Pyramid Engineering & Construction LTD</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+
+<!-- NAVBAR (same structure) -->
+<nav class="navbar" id="navbar">
+  <div class="nav-inner container">
+    <a href="index.html" class="logo">
+      <img src="../logo.png" alt="Pyramid Logo" style="height:48px;width:auto;">
+      <div class="logo-text">
+        <span class="logo-main">PYRAMID</span>
+        <span class="logo-sub">Engineering & Construction</span>
+      </div>
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html" class="nav-link" data-i18n="nav.home">Home</a></li>
+      <li><a href="services.html" class="nav-link active" data-i18n="nav.services">Services</a></li>
+      <li><a href="projects.html" class="nav-link" data-i18n="nav.projects">Projects</a></li>
+      <li><a href="about.html" class="nav-link" data-i18n="nav.about">About</a></li>
+      <li><a href="blog.html" class="nav-link" data-i18n="nav.blog">Blog</a></li>
+      <li><a href="contact.html" class="nav-link" data-i18n="nav.contact">Contact</a></li>
+    </ul>
+    <div class="nav-actions">
+      <div class="lang-switcher">
+        <button class="lang-btn active" onclick="setLang('en')">EN</button>
+        <button class="lang-btn" onclick="setLang('sw')">SW</button>
+        <button class="lang-btn" onclick="setLang('fr')">FR</button>
+      </div>
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme"><i class="fa-solid fa-moon" id="iconMoon"></i><i class="fa-solid fa-sun" id="iconSun" style="display:none"></i></button>
+      <a href="contact.html" class="btn-primary btn-sm" data-i18n="nav.quote">Get a Quote</a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Menu"><i class="fa-solid fa-bars" id="menuIcon"></i></button>
+    </div>
+  </div>
+</nav>
+
+<!-- MOBILE MENU BACKDROP -->
+<div class="mobile-menu-backdrop" id="mobileMenuBackdrop"></div>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="container page-hero-content">
+    <div class="breadcrumb">
+      <a href="index.html">Home</a>
+      <span class="sep">/</span>
+      <span data-i18n="nav.services">Services</span>
+    </div>
+    <div class="section-label light" data-i18n="services.label">What We Do</div>
+    <h1 data-i18n="page.services.title">Our Services</h1>
+    <p data-i18n="page.services.sub">Comprehensive construction and engineering solutions tailored for every client — individuals, businesses, and government.</p>
+  </div>
+</section>
+
+<!-- AUDIENCE TABS -->
+<section class="section-pad">
+  <div class="container">
+    <div class="audience-tabs">
+      <button class="aud-tab active" data-tab="all">All</button>
+      <button class="aud-tab" data-tab="individual" data-i18n="audience.ind">Individual</button>
+      <button class="aud-tab" data-tab="company" data-i18n="audience.corp">Company</button>
+      <button class="aud-tab" data-tab="government" data-i18n="audience.gov.short">Government</button>
+    </div>
+
+    <!-- ALL SERVICES -->
+    <div class="aud-panel" data-panel="all">
+      <div class="service-detail-grid">
+
+        <div class="service-detail-card" id="building">
+          <div class="svc-card-img">
+            <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&q=80" alt="Building Construction" loading="lazy">
+          </div>
+          <div class="svc-card-body">
+            <div class="svc-icon-wrap"><i class="fa-solid fa-hard-hat"></i></div>
+            <h3 data-i18n="svc.build">Building Construction</h3>
+            <p data-i18n="svc.build.desc">Full-cycle construction from foundation to finishing — residential, commercial, and industrial.</p>
+            <div class="svc-features">
+              <div class="svc-feature"> Residential Homes & Villas</div>
+              <div class="svc-feature"> Commercial & Office Buildings</div>
+              <div class="svc-feature"> Industrial Facilities</div>
+              <div class="svc-feature"> Government Infrastructure</div>
+              <div class="svc-feature"> Multi-storey Buildings</div>
+            </div>
+            <a href="contact.html" class="btn-primary">Request a Quote</a>
+          </div>
+        </div>
+
+        <div class="service-detail-card" id="architecture">
+          <div class="svc-card-img">
+            <img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=800&q=80" alt="Architecture" loading="lazy">
+          </div>
+          <div class="svc-card-body">
+            <div class="svc-icon-wrap"><i class="fa-solid fa-drafting-compass"></i></div>
+            <h3 data-i18n="svc.arch">Architecture Planning & Design</h3>
+            <p data-i18n="svc.arch.desc">Innovative architectural designs that blend function, aesthetics, and structural integrity.</p>
+            <div class="svc-features">
+              <div class="svc-feature"> Architectural Drawings & Plans</div>
+              <div class="svc-feature"> 3D Modeling & Visualization</div>
+              <div class="svc-feature"> Structural Engineering Design</div>
+              <div class="svc-feature"> Interior Design Planning</div>
+              <div class="svc-feature"> Site Planning & Landscaping</div>
+            </div>
+            <a href="contact.html" class="btn-primary">Request a Quote</a>
+          </div>
+        </div>
+
+        <div class="service-detail-card" id="consultation">
+          <div class="svc-card-img">
+            <img src="https://images.unsplash.com/photo-1560264280-88b68371db39?w=800&q=80" alt="Consultation" loading="lazy">
+          </div>
+          <div class="svc-card-body">
+            <div class="svc-icon-wrap"><i class="fa-solid fa-comments"></i></div>
+            <h3 data-i18n="svc.consult">Consultation</h3>
+            <p data-i18n="svc.consult.desc">Expert project consultation, feasibility studies, and professional engineering advice.</p>
+            <div class="svc-features">
+              <div class="svc-feature"> Project Feasibility Studies</div>
+              <div class="svc-feature"> Cost & Budget Analysis</div>
+              <div class="svc-feature"> Engineering Advisory</div>
+              <div class="svc-feature"> Site Assessment & Surveys</div>
+              <div class="svc-feature"> Regulatory Compliance Guidance</div>
+            </div>
+            <a href="contact.html" class="btn-primary">Request a Quote</a>
+          </div>
+        </div>
+
+        <div class="service-detail-card" id="renovation">
+          <div class="svc-card-img">
+            <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=800&q=80" alt="Renovation" loading="lazy">
+          </div>
+          <div class="svc-card-body">
+            <div class="svc-icon-wrap"><i class="fa-solid fa-wrench"></i></div>
+            <h3 data-i18n="svc.reno">Renovation & Maintenance</h3>
+            <p data-i18n="svc.reno.desc">Breathe new life into existing structures with expert renovation and ongoing maintenance.</p>
+            <div class="svc-features">
+              <div class="svc-feature"> Full Building Renovation</div>
+              <div class="svc-feature"> Structural Repairs</div>
+              <div class="svc-feature"> Interior Remodeling</div>
+              <div class="svc-feature"> Preventive Maintenance Plans</div>
+              <div class="svc-feature"> Emergency Repair Services</div>
+            </div>
+            <a href="contact.html" class="btn-primary">Request a Quote</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- INDIVIDUAL PANEL -->
+    <div class="aud-panel" data-panel="individual" style="display:none">
+      <div style="text-align:center; padding: 20px 0 40px; color: var(--text-light);">
+        <p style="font-size:16px; max-width:600px; margin:0 auto;">Services tailored for individual homebuilders — from your dream home design to final handover.</p>
+      </div>
+      <div class="service-detail-grid">
+        <div class="service-detail-card">
+          <div class="svc-card-img"><img src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=800&q=80" alt="Home Construction" loading="lazy"></div>
+          <div class="svc-card-body">
+            <div class="svc-icon-wrap"><i class="fa-solid fa-house"></i></div>
+            <h3>Dream Home Construction</h3>
+            <p>We build your family home to your exact specifications, using quality materials within your budget.</p>
+            <div class="svc-features">
+              <div class="svc-feature"> Personalized Design Consultation</div>
+              <div class="svc-feature"> Budget-Friendly Options</div>
+              <div class="svc-feature"> Quality Materials Guarantee</div>
+            </div>
+            <a href="contact.html" class="btn-primary">Get a Quote</a>
+          </div>
+        </div>
+        <div class="service-detail-card">
+          <div class="svc-card-img"><img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=800&q=80" alt="Home Renovation" loading="lazy"></div>
+          <div class="svc-card-body">
+            <div class="svc-icon-wrap"><i class="fa-solid fa-wrench"></i></div>
+            <h3>Home Renovation</h3>
+            <p>Transform your existing home with our expert renovation team — kitchens, bathrooms, extensions, and more.</p>
+            <div class="svc-features">
+              <div class="svc-feature"> Kitchen & Bathroom Remodeling</div>
+              <div class="svc-feature"> Room Extensions</div>
+              <div class="svc-feature"> Structural Upgrades</div>
+            </div>
+            <a href="contact.html" class="btn-primary">Get a Quote</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- COMPANY PANEL -->
+    <div class="aud-panel" data-panel="company" style="display:none">
+      <div style="text-align:center; padding: 20px 0 40px; color: var(--text-light);">
+        <p style="font-size:16px; max-width:600px; margin:0 auto;">Commercial construction and architectural services for businesses of all sizes.</p>
+      </div>
+      <div class="service-detail-grid">
+        <div class="service-detail-card">
+          <div class="svc-card-img"><img src="https://images.unsplash.com/photo-1486325212027-8081e485255e?w=800&q=80" alt="Commercial Building" loading="lazy"></div>
+          <div class="svc-card-body">
+            <div class="svc-icon-wrap"><i class="fa-solid fa-building"></i></div>
+            <h3>Commercial Construction</h3>
+            <p>Office complexes, retail centers, warehouses — built to the highest commercial standards with minimal disruption to your business.</p>
+            <div class="svc-features">
+              <div class="svc-feature"> Office Buildings & Complexes</div>
+              <div class="svc-feature"> Retail & Mall Spaces</div>
+              <div class="svc-feature"> Warehouses & Factories</div>
+            </div>
+            <a href="contact.html" class="btn-primary">Get a Quote</a>
+          </div>
+        </div>
+        <div class="service-detail-card">
+          <div class="svc-card-img"><img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=800&q=80" alt="Corporate Architecture" loading="lazy"></div>
+          <div class="svc-card-body">
+            <div class="svc-icon-wrap"><i class="fa-solid fa-drafting-compass"></i></div>
+            <h3>Corporate Architecture</h3>
+            <p>Distinctive corporate designs that reflect your brand identity and create productive work environments.</p>
+            <div class="svc-features">
+              <div class="svc-feature"> Brand-Aligned Designs</div>
+              <div class="svc-feature"> Open Office Planning</div>
+              <div class="svc-feature"> Sustainable Building Design</div>
+            </div>
+            <a href="contact.html" class="btn-primary">Get a Quote</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- GOVERNMENT PANEL -->
+    <div class="aud-panel" data-panel="government" style="display:none">
+      <div style="text-align:center; padding: 20px 0 40px; color: var(--text-light);">
+        <p style="font-size:16px; max-width:600px; margin:0 auto;">Reliable partner for government and public sector construction projects with full regulatory compliance.</p>
+      </div>
+      <div class="service-detail-grid">
+        <div class="service-detail-card">
+          <div class="svc-card-img"><img src="https://images.unsplash.com/photo-1523217582562-09d0def993a6?w=800&q=80" alt="Government Building" loading="lazy"></div>
+          <div class="svc-card-body">
+            <div class="svc-icon-wrap"><i class="fa-solid fa-landmark"></i></div>
+            <h3>Public Infrastructure</h3>
+            <p>Government offices, schools, hospitals, and public facilities built to national standards and delivered on time.</p>
+            <div class="svc-features">
+              <div class="svc-feature"> Government Offices</div>
+              <div class="svc-feature"> Schools & Educational Facilities</div>
+              <div class="svc-feature"> Healthcare Buildings</div>
+            </div>
+            <a href="contact.html" class="btn-primary">Get a Quote</a>
+          </div>
+        </div>
+        <div class="service-detail-card">
+          <div class="svc-card-img"><img src="https://images.unsplash.com/photo-1560264280-88b68371db39?w=800&q=80" alt="Government Consultation" loading="lazy"></div>
+          <div class="svc-card-body">
+            <div class="svc-icon-wrap"></div>
+            <h3>Government Consultation & Compliance</h3>
+            <p>Full compliance with government regulations, environmental assessments, and public procurement requirements.</p>
+            <div class="svc-features">
+              <div class="svc-feature"> Regulatory Compliance</div>
+              <div class="svc-feature"> Environmental Impact Assessments</div>
+              <div class="svc-feature"> Tender Preparation Support</div>
+            </div>
+            <a href="contact.html" class="btn-primary">Get a Quote</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- PROCESS & FINAL CTA -->
+<section class="section-pad bg-dark-section">
+  <div class="container text-center">
+    <div class="section-label light">Ready?</div>
+    <h2 class="section-title light">Start Your Project with Us</h2>
+    <p style="color:rgba(255,255,255,0.65); max-width:540px; margin: 0 auto 36px; line-height:1.75;">
+      Contact our team for a free initial consultation. We'll guide you through every step.
+    </p>
+    <div style="display:flex; gap:16px; justify-content:center; flex-wrap:wrap;">
+      <a href="contact.html" class="btn-primary btn-lg">Get a Quote</a>
+      <a href="contact.html" class="btn-outline btn-lg white-outline">
+        <i class="fa-solid fa-phone fi"></i> Call 0757 744 555
+      </a>
+    </div>
+  </div>
+</section>
+<!-- FOOTER -->
+<footer class="footer" id="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="logo">
+          <img src="../logo.png" alt="Pyramid Logo" style="height:48px;width:auto;">
+          <div class="logo-text">
+            <span class="logo-main">PYRAMID</span>
+            <span class="logo-sub">Engineering & Construction</span>
+          </div>
+        </div>
+        <p data-i18n="footer.desc">Building Tanzania's future with expertise, integrity, and dedication to quality construction since 2008.</p>
+        <div class="footer-socials">
+          <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+          <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4 data-i18n="footer.services">Services</h4>
+        <ul>
+          <li><a href="services.html" data-i18n="svc.build">Building Construction</a></li>
+          <li><a href="services.html" data-i18n="svc.arch.short">Architecture & Design</a></li>
+          <li><a href="services.html" data-i18n="svc.consult">Consultation</a></li>
+          <li><a href="services.html" data-i18n="svc.reno.short">Renovation & Maintenance</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4 data-i18n="footer.company">Company</h4>
+        <ul>
+          <li><a href="about.html"   data-i18n="nav.about">About Us</a></li>
+          <li><a href="projects.html" data-i18n="nav.projects">Projects</a></li>
+          <li><a href="blog.html"    data-i18n="nav.blog">Blog</a></li>
+          <li><a href="contact.html" data-i18n="nav.contact">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4 data-i18n="footer.contact">Contact Us</h4>
+        <div class="footer-contact-item">
+          <i class="fa-solid fa-envelope fi"></i>
+          <a href="mailto:pyramid.constructor.ltd@gmail.com">pyramid.constructor.ltd@gmail.com</a>
+        </div>
+        <div class="footer-contact-item">
+          <i class="fa-solid fa-phone fi"></i>
+          <a href="tel:+255757744555">0757 744 555</a>
+        </div>
+        <div class="footer-contact-item">
+          <i class="fa-brands fa-whatsapp fi"></i>
+          <a href="https://wa.me/255757744555?text=Hello%20Pyramid%20Engineering%2C%20I%20would%20like%20to%20inquire." target="_blank" data-i18n="footer.wa">WhatsApp Us</a>
+        </div>
+        <div class="footer-contact-item">
+          <i class="fa-solid fa-location-dot fi"></i>
+          <span data-i18n="footer.loc">Dar es Salaam, Tanzania</span>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 Pyramid Engineering & Construction LTD. <span data-i18n="footer.rights">All rights reserved.</span></p>
+      <div class="footer-bottom-links">
+        <a href="#" data-i18n="footer.privacy">Privacy Policy</a>
+        <a href="#" data-i18n="footer.terms">Terms of Service</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- WHATSAPP FLOATING BUTTON -->
+
+<a href="https://wa.me/255757744555?text=Hello%20Pyramid%20Engineering%2C%20I%20would%20like%20to%20inquire%20about%20your%20services." class="whatsapp-float" target="_blank" aria-label="Chat on WhatsApp">
+  <svg viewBox="0 0 24 24" fill="currentColor" width="28" height="28">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+  </svg>
+</a>
+
+<button class="back-top" id="backTop" aria-label="Back to top">
+  <i class="fa-solid fa-chevron-up"></i>
+</button>
+<script>window.PYRAMID_API_URL = 'http://localhost:5000/api';</script>
+<script src="api.js"></script>
+<script src="i18n.js"></script>
+<script src="main.js"></script>
+</body>
+</html>

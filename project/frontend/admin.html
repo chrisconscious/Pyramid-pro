@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pyramid Admin Dashboard</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome 6.5 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Quill.js -->
+    <script src="https://cdn.jsdelivr.net/npm/quill@2.0.0/dist/quill.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/quill@2.0.0/dist/quill.snow.css" rel="stylesheet">
+    <!-- Admin CSS -->
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+    <!-- Login Screen -->
+    <div id="login-screen" class="login-screen">
+        <div class="login-container">
+            <div class="login-header">
+                <h1><i class="fas fa-building"></i> Pyramid Admin</h1>
+                <p>Engineering & Construction LTD</p>
+            </div>
+            <form id="login-form" class="login-form">
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" required>
+                </div>
+                <button type="submit" class="btn btn-primary btn-full">Login</button>
+            </form>
+            <div id="login-error" class="error-message"></div>
+        </div>
+    </div>
+
+    <!-- Main App -->
+    <div id="app" class="app hidden">
+        <!-- Sidebar -->
+        <aside id="sidebar" class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <i class="fas fa-chevron-up"></i>
+                    <span>PYRAMID Admin</span>
+                </div>
+                <button id="sidebar-collapse" class="sidebar-collapse">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+            <div class="sidebar-user">
+                <div class="user-avatar">
+                    <i class="fas fa-user"></i>
+                </div>
+                <div class="user-info">
+                    <div class="user-name" id="user-name">Admin Name</div>
+                    <div class="user-role" id="user-role">super_admin</div>
+                </div>
+            </div>
+            <nav class="sidebar-nav">
+                <div class="nav-section">
+                    <div class="nav-item" data-route="dashboard">
+                        <i class="fas fa-chart-line"></i>
+                        <span>Dashboard</span>
+                    </div>
+                    <div class="nav-item" data-route="pages">
+                        <i class="fas fa-file-alt"></i>
+                        <span>Pages</span>
+                    </div>
+                    <div class="nav-item" data-route="services">
+                        <i class="fas fa-wrench"></i>
+                        <span>Services</span>
+                    </div>
+                    <div class="nav-item" data-route="projects">
+                        <i class="fas fa-building"></i>
+                        <span>Projects</span>
+                    </div>
+                    <div class="nav-item" data-route="blogs">
+                        <i class="fas fa-newspaper"></i>
+                        <span>Blog</span>
+                    </div>
+                    <div class="nav-item" data-route="testimonials">
+                        <i class="fas fa-star"></i>
+                        <span>Testimonials</span>
+                    </div>
+                    <div class="nav-item" data-route="team">
+                        <i class="fas fa-users"></i>
+                        <span>Team</span>
+                    </div>
+                    <div class="nav-item" data-route="partners">
+                        <i class="fas fa-handshake"></i>
+                        <span>Partners</span>
+                    </div>
+                    <div class="nav-item" data-route="messages">
+                        <i class="fas fa-envelope"></i>
+                        <span>Contact Messages</span>
+                        <span class="badge" id="messages-badge"></span>
+                    </div>
+                </div>
+                <div class="nav-divider"></div>
+                <div class="nav-section">
+                    <div class="nav-item" data-route="media">
+                        <i class="fas fa-images"></i>
+                        <span>Media Library</span>
+                    </div>
+                    <div class="nav-item" data-route="settings">
+                        <i class="fas fa-cog"></i>
+                        <span>Settings</span>
+                    </div>
+                    <div class="nav-item" data-route="users">
+                        <i class="fas fa-user-shield"></i>
+                        <span>Users</span>
+                    </div>
+                    <div class="nav-item" data-route="ai">
+                        <i class="fas fa-robot"></i>
+                        <span>AI Conversations</span>
+                    </div>
+                </div>
+                <div class="nav-divider"></div>
+                <div class="nav-section">
+                    <a href="../index.html" class="nav-item external">
+                        <i class="fas fa-external-link-alt"></i>
+                        <span>View Website</span>
+                    </a>
+                    <div class="nav-item" id="logout-btn">
+                        <i class="fas fa-sign-out-alt"></i>
+                        <span>Logout</span>
+                    </div>
+                </div>
+            </nav>
+        </aside>
+
+        <!-- Topbar -->
+        <header class="topbar">
+            <div class="topbar-left">
+                <button id="mobile-menu-btn" class="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <h1 id="page-title">Dashboard</h1>
+            </div>
+            <div class="topbar-right">
+                <button id="notifications-btn" class="topbar-btn">
+                    <i class="fas fa-bell"></i>
+                </button>
+                <button id="theme-toggle" class="topbar-btn">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <div class="user-menu">
+                    <div class="user-avatar-small">
+                        <i class="fas fa-user"></i>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main id="main-content" class="main-content">
+            <!-- Content will be loaded here -->
+        </main>
+
+        <!-- Mobile Bottom Nav -->
+        <nav id="bottom-nav" class="bottom-nav">
+            <div class="bottom-nav-item" data-route="dashboard">
+                <i class="fas fa-chart-line"></i>
+                <span>Dashboard</span>
+            </div>
+            <div class="bottom-nav-item" data-route="content">
+                <i class="fas fa-edit"></i>
+                <span>Content</span>
+            </div>
+            <div class="bottom-nav-item" data-route="messages">
+                <i class="fas fa-envelope"></i>
+                <span>Messages</span>
+            </div>
+        </nav>
+    </div>
+
+    <!-- Modals and Overlays -->
+    <!-- Toast Container -->
+    <div id="toast-container" class="toast-container"></div>
+
+    <!-- Confirmation Modal -->
+    <div id="confirm-modal" class="modal-overlay hidden">
+        <div class="modal confirm-modal">
+            <div class="modal-header">
+                <h3 id="confirm-title">Confirm Action</h3>
+                <button class="modal-close">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p id="confirm-message">Are you sure?</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="confirm-cancel">Cancel</button>
+                <button class="btn btn-danger" id="confirm-ok">Confirm</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Media Picker Modal -->
+    <div id="media-picker-modal" class="modal-overlay hidden">
+        <div class="modal media-picker-modal">
+            <div class="modal-header">
+                <h3>Select Media</h3>
+                <button class="modal-close">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="media-picker-controls">
+                    <input type="text" placeholder="Search media..." id="media-search">
+                    <div class="media-filters">
+                        <button class="filter-btn active" data-filter="all">All</button>
+                        <button class="filter-btn" data-filter="image">Images</button>
+                        <button class="filter-btn" data-filter="video">Videos</button>
+                        <button class="filter-btn" data-filter="document">Documents</button>
+                    </div>
+                    <button class="btn btn-primary" id="upload-new-media">Upload New</button>
+                </div>
+                <div id="media-grid" class="media-grid">
+                    <!-- Media items will be loaded here -->
+                </div>
+                <button id="load-more-media" class="btn btn-secondary">Load More</button>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="media-picker-cancel">Cancel</button>
+                <button class="btn btn-primary" id="media-picker-select">Select</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Upload Modal -->
+    <div id="upload-modal" class="modal-overlay hidden">
+        <div class="modal upload-modal">
+            <div class="modal-header">
+                <h3>Upload Files</h3>
+                <button class="modal-close">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="upload-zone" id="upload-zone">
+                    <i class="fas fa-cloud-upload-alt"></i>
+                    <p>Drag & drop files here or click to browse</p>
+                    <input type="file" id="file-input" multiple accept="image/*,video/*,application/pdf">
+                </div>
+                <div id="upload-progress" class="upload-progress hidden">
+                    <!-- Progress bars will be added here -->
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="upload-cancel">Cancel</button>
+                <button class="btn btn-primary" id="upload-start">Upload</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Right Drawer -->
+    <div id="right-drawer" class="right-drawer hidden">
+        <div class="drawer-content">
+            <!-- Drawer content will be loaded here -->
+        </div>
+    </div>
+
+    <!-- Full Screen Form -->
+    <div id="full-screen-form" class="full-screen-form hidden">
+        <div class="form-header">
+            <button id="form-back" class="btn btn-secondary">
+                <i class="fas fa-arrow-left"></i> Back                      
+            </button>
+            <h2 id="form-title">Form Title</h2>
+            <div class="form-actions">
+                <button id="form-save-draft" class="btn btn-secondary">Save Draft</button>
+                <button id="form-publish" class="btn btn-primary">Publish</button>
+            </div>
+        </div>
+        <div class="form-content">
+            <!-- Form content will be loaded here -->
+        </div>
+    </div>
+
+    <!-- Admin JS -->
+    <script src="admin.js"></script>
+</body>
+</html>

@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Blog — Pyramid Engineering & Construction LTD</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    /* ── Blog-specific styles ── */
+    .blog-layout { display:grid; grid-template-columns:1fr 320px; gap:4rem; align-items:start; }
+    
+    /* Featured post */
+    .featured-post { position:relative; border-radius:12px; overflow:hidden; margin-bottom:3rem; background:var(--surface); border:1px solid var(--border); display:grid; grid-template-columns:1fr 1fr; }
+    .featured-post-img { aspect-ratio:unset; overflow:hidden; min-height:360px; }
+    .featured-post-img img { width:100%; height:100%; object-fit:cover; transition:transform .5s; }
+    .featured-post:hover .featured-post-img img { transform:scale(1.04); }
+    .featured-post-body { padding:3rem; display:flex; flex-direction:column; justify-content:center; }
+    .post-category { display:inline-flex; align-items:center; gap:.4rem; background:var(--orange-10); color:var(--orange); font-size:.8rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; padding:.3rem .8rem; border-radius:4px; margin-bottom:1rem; width:fit-content; }
+    .featured-post-body h2 { font-size:1.8rem; line-height:1.2; margin-bottom:1rem; }
+    .featured-post-body p { color:var(--text-muted); line-height:1.7; margin-bottom:1.5rem; font-size:.95rem; }
+    .post-meta { display:flex; align-items:center; gap:1rem; font-size:.825rem; color:var(--text-muted); margin-bottom:1.5rem; flex-wrap:wrap; }
+    .post-meta .meta-item { display:flex; align-items:center; gap:.35rem; }
+    .read-more { display:inline-flex; align-items:center; gap:.5rem; color:var(--orange); font-weight:700; font-size:.9rem; text-decoration:none; transition:gap .2s; }
+    .read-more:hover { gap:.8rem; }
+
+    /* Filter tabs */
+    .blog-filters { display:flex; gap:.75rem; flex-wrap:wrap; margin-bottom:2.5rem; }
+    .blog-filter { padding:.5rem 1.2rem; border:1.5px solid var(--border); border-radius:30px; font-size:.875rem; font-weight:600; cursor:pointer; background:var(--surface); color:var(--text); transition:all .2s; }
+    .blog-filter:hover, .blog-filter.active { background:var(--orange); border-color:var(--orange); color:#fff; }
+
+    /* Blog grid */
+    .blog-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:2rem; }
+    .blog-card { background:var(--surface); border:1px solid var(--border); border-radius:8px; overflow:hidden; transition:transform .3s,box-shadow .3s; }
+    .blog-card:hover { transform:translateY(-6px); box-shadow:0 16px 48px rgba(0,0,0,.1); }
+    .blog-card-img { aspect-ratio:16/9; overflow:hidden; }
+    .blog-card-img img { width:100%; height:100%; object-fit:cover; transition:transform .5s; }
+    .blog-card:hover .blog-card-img img { transform:scale(1.05); }
+    .blog-card-body { padding:1.5rem; }
+    .blog-card-body .post-category { margin-bottom:.75rem; }
+    .blog-card-body h3 { font-size:1.1rem; line-height:1.3; margin-bottom:.75rem; }
+    .blog-card-body h3 a { color:var(--text); text-decoration:none; }
+    .blog-card-body h3 a:hover { color:var(--orange); }
+    .blog-card-body p { color:var(--text-muted); font-size:.875rem; line-height:1.6; margin-bottom:1rem; }
+    .blog-card-footer { display:flex; align-items:center; justify-content:space-between; border-top:1px solid var(--border); padding-top:1rem; }
+
+    /* Sidebar */
+    .sidebar { position:sticky; top:100px; display:flex; flex-direction:column; gap:2rem; }
+    .sidebar-card { background:var(--surface); border:1px solid var(--border); border-radius:8px; padding:1.75rem; }
+    .sidebar-card h4 { font-size:1rem; font-weight:800; margin-bottom:1.25rem; padding-bottom:.75rem; border-bottom:1px solid var(--border); }
+    
+    /* Search */
+    .sidebar-search { display:flex; gap:.5rem; }
+    .sidebar-search input { flex:1; padding:.7rem 1rem; border:1.5px solid var(--border); border-radius:6px; font-size:.875rem; font-family:var(--font-body); background:var(--bg); color:var(--text); }
+    .sidebar-search input:focus { outline:none; border-color:var(--orange); }
+    .sidebar-search button { padding:.7rem .9rem; background:var(--orange); color:#fff; border:none; border-radius:6px; cursor:pointer; }
+
+    /* Categories */
+    .cat-list { list-style:none; padding:0; margin:0; }
+    .cat-list li { display:flex; justify-content:space-between; align-items:center; padding:.6rem 0; border-bottom:1px solid var(--border); font-size:.9rem; cursor:pointer; }
+    .cat-list li:last-child { border-bottom:none; }
+    .cat-list li:hover { color:var(--orange); }
+    .cat-count { background:var(--orange-10); color:var(--orange); font-size:.75rem; font-weight:700; padding:.2rem .6rem; border-radius:30px; }
+
+    /* Popular posts */
+    .popular-list { list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:1rem; }
+    .popular-item { display:flex; gap:1rem; align-items:flex-start; }
+    .popular-thumb { width:64px; height:64px; border-radius:6px; overflow:hidden; flex-shrink:0; }
+    .popular-thumb img { width:100%; height:100%; object-fit:cover; }
+    .popular-text h5 { font-size:.875rem; line-height:1.3; margin-bottom:.3rem; }
+    .popular-text .p-date { font-size:.775rem; color:var(--text-muted); display:flex; align-items:center; gap:.3rem; }
+
+    /* Tags */
+    .tag-cloud { display:flex; flex-wrap:wrap; gap:.5rem; }
+    .tag { padding:.35rem .8rem; border:1px solid var(--border); border-radius:4px; font-size:.8rem; cursor:pointer; transition:all .2s; }
+    .tag:hover { background:var(--orange); border-color:var(--orange); color:#fff; }
+
+    /* CTA card */
+    .sidebar-cta { background:var(--navy); color:#fff; border-radius:8px; padding:2rem; text-align:center; }
+    .sidebar-cta h4 { color:#fff; font-size:1.1rem; margin-bottom:.75rem; }
+    .sidebar-cta p { opacity:.75; font-size:.875rem; margin-bottom:1.5rem; line-height:1.6; }
+    .sidebar-cta .btn-cta { display:block; background:var(--orange); color:#fff; padding:.85rem; border-radius:6px; font-family:var(--font-display); font-weight:700; letter-spacing:.05em; text-decoration:none; transition:opacity .2s; }
+    .sidebar-cta .btn-cta:hover { opacity:.9; }
+
+    /* Newsletter */
+    .newsletter-card { background:linear-gradient(135deg, var(--navy) 0%, #1a3560 100%); color:#fff; border-radius:12px; padding:3rem; text-align:center; margin-top:3rem; }
+    .newsletter-card h3 { color:#fff; margin-bottom:.75rem; }
+    .newsletter-card p { opacity:.8; margin-bottom:2rem; max-width:500px; margin-left:auto; margin-right:auto; font-size:.95rem; }
+    .newsletter-form { display:flex; gap:.75rem; max-width:480px; margin:0 auto; }
+    .newsletter-form input { flex:1; padding:.9rem 1.2rem; border:none; border-radius:6px; font-size:.95rem; font-family:var(--font-body); }
+    .newsletter-form button { padding:.9rem 1.5rem; background:var(--orange); color:#fff; border:none; border-radius:6px; font-family:var(--font-display); font-weight:700; cursor:pointer; white-space:nowrap; transition:opacity .2s; }
+    .newsletter-form button:hover { opacity:.9; }
+
+    /* Load more */
+    .load-more-wrap { text-align:center; margin-top:3rem; }
+
+    @media(max-width:1050px){ .blog-layout { grid-template-columns:1fr; } .sidebar { position:static; } }
+    @media(max-width:700px){ .featured-post { grid-template-columns:1fr; } .featured-post-img { min-height:240px; } .blog-grid { grid-template-columns:1fr; } .newsletter-form { flex-direction:column; } }
+  </style>
+</head>
+<body>
+
+<nav class="navbar" id="navbar">
+  <div class="nav-inner container">
+    <a href="index.html" class="logo">
+      <img src="../logo.png" alt="Pyramid Logo" style="height:48px;width:auto;">
+      <div class="logo-text">
+        <span class="logo-main">PYRAMID</span>
+        <span class="logo-sub">Engineering & Construction</span>
+      </div>
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html" class="nav-link" data-i18n="nav.home">Home</a></li>
+      <li><a href="services.html" class="nav-link" data-i18n="nav.services">Services</a></li>
+      <li><a href="projects.html" class="nav-link" data-i18n="nav.projects">Projects</a></li>
+      <li><a href="about.html" class="nav-link" data-i18n="nav.about">About</a></li>
+      <li><a href="blog.html" class="nav-link active" data-i18n="nav.blog">Blog</a></li>
+      <li><a href="contact.html" class="nav-link" data-i18n="nav.contact">Contact</a></li>
+    </ul>
+    <div class="nav-actions">
+      <div class="lang-switcher">
+        <button class="lang-btn active" onclick="setLang('en')">EN</button>
+        <button class="lang-btn" onclick="setLang('sw')">SW</button>
+        <button class="lang-btn" onclick="setLang('fr')">FR</button>
+      </div>
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme"><i class="fa-solid fa-moon" id="iconMoon"></i><i class="fa-solid fa-sun" id="iconSun" style="display:none"></i></button>
+      <a href="contact.html" class="btn-primary btn-sm" data-i18n="nav.quote">Get a Quote</a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Menu"><i class="fa-solid fa-bars" id="menuIcon"></i></button>
+    </div>
+  </div>
+</nav>
+
+<!-- MOBILE MENU BACKDROP -->
+<div class="mobile-menu-backdrop" id="mobileMenuBackdrop"></div>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="container page-hero-content">
+    <div class="breadcrumb">
+      <a href="index.html">Home</a>
+      <span class="sep">/</span>
+      <span>Blog</span>
+    </div>
+    <div class="section-label light">Knowledge & Insights</div>
+    <h1>Construction Tips & Guides</h1>
+    <p>Expert advice on building, design, materials, budgeting, and more — from Tanzania's trusted engineering team.</p>
+  </div>
+</section>
+
+<section class="section-pad">
+  <div class="container">
+    <div class="blog-layout">
+      <!-- MAIN CONTENT -->
+      <div>
+
+        <!-- FEATURED POST -->
+        <div class="featured-post reveal">
+          <div class="featured-post-img">
+            <img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=800&q=80" alt="How to budget for a house in Tanzania" loading="lazy">
+          </div>
+          <div class="featured-post-body">
+            <div class="post-category"><i class="fa-solid fa-bookmark"></i> Cost & Budgeting</div>
+            <h2>How to Budget for Building a House in Tanzania in 2025</h2>
+            <div class="post-meta">
+              <div class="meta-item"><i class="fa-solid fa-circle"></i> Emmanuel Mwangi</div>
+              <div class="meta-item"><i class="fa-solid fa-calendar"></i> 15 Jan 2025</div>
+              <div class="meta-item"><i class="fa-solid fa-clock"></i> 8 min read</div>
+            </div>
+            <p>Constructing a home is the biggest financial decision most Tanzanians make. This comprehensive guide walks you through every cost component — from land and foundation to finishing and permits — so you can plan with confidence.</p>
+            <a href="#" class="read-more">Read Full Article <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
+        </div>
+
+        <!-- FILTER TABS -->
+        <div class="blog-filters reveal">
+          <button class="blog-filter active" onclick="filterBlog(this,'all')">All</button>
+          <button class="blog-filter" onclick="filterBlog(this,'cost')">Cost & Budgeting</button>
+          <button class="blog-filter" onclick="filterBlog(this,'materials')">Materials</button>
+          <button class="blog-filter" onclick="filterBlog(this,'design')">Design & Architecture</button>
+          <button class="blog-filter" onclick="filterBlog(this,'tips')">Construction Tips</button>
+          <button class="blog-filter" onclick="filterBlog(this,'govt')">Government Projects</button>
+        </div>
+
+        <!-- BLOG GRID -->
+        <div class="blog-grid" id="blogGrid">
+
+          <div class="blog-card reveal" data-cat="materials">
+            <div class="blog-card-img">
+              <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80" alt="Best building materials Tanzania" loading="lazy">
+            </div>
+            <div class="blog-card-body">
+              <div class="post-category"><i class="fa-solid fa-layer-group"></i> Materials</div>
+              <h3><a href="#">The Best Building Materials for Tanzania's Climate: A Comprehensive Guide</a></h3>
+              <p>Hot coastal humidity, inland heat, and occasional heavy rains demand materials that endure. Here's what our engineers recommend for lasting construction.</p>
+              <div class="post-meta">
+                <div class="meta-item"><i class="fa-solid fa-calendar"></i> 2 Feb 2025</div>
+                <div class="meta-item"><i class="fa-solid fa-clock"></i> 6 min read</div>
+              </div>
+            </div>
+            <div class="blog-card-footer">
+              <div class="post-category" style="margin:0;"><i class="fa-solid fa-bookmark"></i> Materials</div>
+              <a href="#" class="read-more" style="font-size:.825rem;">Read More <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+          </div>
+
+          <div class="blog-card reveal" data-cat="tips">
+            <div class="blog-card-img">
+              <img src="https://images.unsplash.com/photo-1589939705384-5185137a7f0f?w=600&q=80" alt="Choosing the right contractor Tanzania" loading="lazy">
+            </div>
+            <div class="blog-card-body">
+              <div class="post-category"><i class="fa-solid fa-hard-hat"></i> Construction Tips</div>
+              <h3><a href="#">10 Questions to Ask Before Hiring a Construction Contractor in Tanzania</a></h3>
+              <p>Protect your investment by asking the right questions upfront. From licenses to payment structures, here's your essential contractor checklist.</p>
+              <div class="post-meta">
+                <div class="meta-item"><i class="fa-solid fa-calendar"></i> 18 Feb 2025</div>
+                <div class="meta-item"><i class="fa-solid fa-clock"></i> 5 min read</div>
+              </div>
+            </div>
+            <div class="blog-card-footer">
+              <div class="post-category" style="margin:0;"><i class="fa-solid fa-bookmark"></i> Tips</div>
+              <a href="#" class="read-more" style="font-size:.825rem;">Read More <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+          </div>
+
+          <div class="blog-card reveal" data-cat="design">
+            <div class="blog-card-img">
+              <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&q=80" alt="Modern house design Tanzania" loading="lazy">
+            </div>
+            <div class="blog-card-body">
+              <div class="post-category"><i class="fa-solid fa-pen-nib"></i> Design & Architecture</div>
+              <h3><a href="#">Modern vs Traditional: Choosing the Right House Design for Dar es Salaam</a></h3>
+              <p>Explore the pros and cons of contemporary minimalist design versus traditional Swahili architecture for urban Tanzanian homes.</p>
+              <div class="post-meta">
+                <div class="meta-item"><i class="fa-solid fa-calendar"></i> 5 Mar 2025</div>
+                <div class="meta-item"><i class="fa-solid fa-clock"></i> 7 min read</div>
+              </div>
+            </div>
+            <div class="blog-card-footer">
+              <div class="post-category" style="margin:0;"><i class="fa-solid fa-bookmark"></i> Design</div>
+              <a href="#" class="read-more" style="font-size:.825rem;">Read More <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+          </div>
+
+          <div class="blog-card reveal" data-cat="cost">
+            <div class="blog-card-img">
+              <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=600&q=80" alt="Construction financing Tanzania" loading="lazy">
+            </div>
+            <div class="blog-card-body">
+              <div class="post-category"><i class="fa-solid fa-chart-line"></i> Cost & Budgeting</div>
+              <h3><a href="#">Construction Financing in Tanzania: Bank Loans, NHIF, and Self-Funding Strategies</a></h3>
+              <p>A practical comparison of financing options available to Tanzanian homebuilders — including CRDB, NMB, and NHIF housing funds.</p>
+              <div class="post-meta">
+                <div class="meta-item"><i class="fa-solid fa-calendar"></i> 22 Mar 2025</div>
+                <div class="meta-item"><i class="fa-solid fa-clock"></i> 9 min read</div>
+              </div>
+            </div>
+            <div class="blog-card-footer">
+              <div class="post-category" style="margin:0;"><i class="fa-solid fa-bookmark"></i> Finance</div>
+              <a href="#" class="read-more" style="font-size:.825rem;">Read More <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+          </div>
+
+          <div class="blog-card reveal" data-cat="govt">
+            <div class="blog-card-img">
+              <img src="https://images.unsplash.com/photo-1486325212027-8081e485255e?w=600&q=80" alt="Government procurement Tanzania PPRA" loading="lazy">
+            </div>
+            <div class="blog-card-body">
+              <div class="post-category"><i class="fa-solid fa-landmark"></i> Government Projects</div>
+              <h3><a href="#">Understanding Tanzania's PPRA Procurement Process for Construction Tenders</a></h3>
+              <p>A step-by-step breakdown of how the Public Procurement Regulatory Authority of Tanzania manages construction contracts for government projects.</p>
+              <div class="post-meta">
+                <div class="meta-item"><i class="fa-solid fa-calendar"></i> 10 Apr 2025</div>
+                <div class="meta-item"><i class="fa-solid fa-clock"></i> 11 min read</div>
+              </div>
+            </div>
+            <div class="blog-card-footer">
+              <div class="post-category" style="margin:0;"><i class="fa-solid fa-bookmark"></i> Government</div>
+              <a href="#" class="read-more" style="font-size:.825rem;">Read More <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+          </div>
+
+          <div class="blog-card reveal" data-cat="materials">
+            <div class="blog-card-img">
+              <img src="https://images.unsplash.com/photo-1591955506264-3f5a6834570a?w=600&q=80" alt="Reinforced concrete Tanzania" loading="lazy">
+            </div>
+            <div class="blog-card-body">
+              <div class="post-category"><i class="fa-solid fa-layer-group"></i> Materials</div>
+              <h3><a href="#">Why Reinforced Concrete is Still the Best Choice for Multi-Storey Buildings in East Africa</a></h3>
+              <p>Despite new alternatives, reinforced concrete remains the gold standard for structural integrity in tropical climates. Here's the engineering rationale.</p>
+              <div class="post-meta">
+                <div class="meta-item"><i class="fa-solid fa-calendar"></i> 28 Apr 2025</div>
+                <div class="meta-item"><i class="fa-solid fa-clock"></i> 6 min read</div>
+              </div>
+            </div>
+            <div class="blog-card-footer">
+              <div class="post-category" style="margin:0;"><i class="fa-solid fa-bookmark"></i> Materials</div>
+              <a href="#" class="read-more" style="font-size:.825rem;">Read More <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+          </div>
+
+        </div><!-- end blog grid -->
+
+        <div class="load-more-wrap reveal">
+          <button class="btn-outline" onclick="this.textContent='No more articles to load'; this.disabled=true; this.style.opacity='.5';">Load More Articles</button>
+        </div>
+
+        <!-- Newsletter -->
+        <div class="newsletter-card reveal" style="margin-top:4rem;">
+          <h3>Get Construction Insights in Your Inbox</h3>
+          <p>Subscribe to our newsletter for expert construction tips, material guides, cost updates, and exclusive Pyramid project stories — delivered monthly.</p>
+          <div class="newsletter-form">
+            <input type="email" placeholder="your@email.com" id="nlEmail">
+            <button onclick="subscribeNL()">Subscribe</button>
+          </div>
+        </div>
+
+      </div><!-- end main -->
+
+      <!-- SIDEBAR -->
+      <div class="sidebar">
+
+        <div class="sidebar-card">
+          <h4>Search Articles</h4>
+          <div class="sidebar-search">
+            <input type="text" placeholder="Search...">
+            <button><i class="fa-solid fa-magnifying-glass"></i></button>
+          </div>
+        </div>
+
+        <div class="sidebar-card">
+          <h4>Categories</h4>
+          <ul class="cat-list">
+            <li><span>Cost & Budgeting</span><span class="cat-count">8</span></li>
+            <li><span>Materials & Supplies</span><span class="cat-count">6</span></li>
+            <li><span>Design & Architecture</span><span class="cat-count">5</span></li>
+            <li><span>Construction Tips</span><span class="cat-count">9</span></li>
+            <li><span>Government Projects</span><span class="cat-count">3</span></li>
+            <li><span>Renovation Guide</span><span class="cat-count">4</span></li>
+          </ul>
+        </div>
+
+        <div class="sidebar-card">
+          <h4>Popular Articles</h4>
+          <ul class="popular-list">
+            <li class="popular-item">
+              <div class="popular-thumb"><img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=200&q=70" alt="" loading="lazy"></div>
+              <div class="popular-text"><h5>How to Budget for Building a House in Tanzania in 2025</h5><div class="p-date"><i class="fa-solid fa-calendar"></i> 15 Jan 2025</div></div>
+            </li>
+            <li class="popular-item">
+              <div class="popular-thumb"><img src="https://images.unsplash.com/photo-1589939705384-5185137a7f0f?w=200&q=70" alt="" loading="lazy"></div>
+              <div class="popular-text"><h5>10 Questions to Ask Before Hiring a Contractor</h5><div class="p-date"><i class="fa-solid fa-calendar"></i> 18 Feb 2025</div></div>
+            </li>
+            <li class="popular-item">
+              <div class="popular-thumb"><img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=200&q=70" alt="" loading="lazy"></div>
+              <div class="popular-text"><h5>Best Building Materials for Tanzania's Climate</h5><div class="p-date"><i class="fa-solid fa-calendar"></i> 2 Feb 2025</div></div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="sidebar-card">
+          <h4>Tags</h4>
+          <div class="tag-cloud">
+            <span class="tag">Construction</span>
+            <span class="tag">Tanzania</span>
+            <span class="tag">Housing</span>
+            <span class="tag">Budget</span>
+            <span class="tag">Concrete</span>
+            <span class="tag">Architecture</span>
+            <span class="tag">Renovation</span>
+            <span class="tag">DAR</span>
+            <span class="tag">Foundation</span>
+            <span class="tag">Materials</span>
+            <span class="tag">PPRA</span>
+            <span class="tag">Financing</span>
+          </div>
+        </div>
+
+        <div class="sidebar-cta">
+          <h4>Ready to Start Building?</h4>
+          <p>Our team is ready to help you plan, design, and build your project with confidence.</p>
+          <a href="contact.html" class="btn-cta">Get a Quote</a>
+        </div>
+
+      </div><!-- end sidebar -->
+    </div><!-- end blog-layout -->
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer" id="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="logo">
+          <img src="../logo.png" alt="Pyramid Logo" style="height:48px;width:auto;">
+          <div class="logo-text">
+            <span class="logo-main">PYRAMID</span>
+            <span class="logo-sub">Engineering & Construction</span>
+          </div>
+        </div>
+        <p data-i18n="footer.desc">Building Tanzania's future with expertise, integrity, and dedication to quality construction since 2008.</p>
+        <div class="footer-socials">
+          <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+          <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4 data-i18n="footer.services">Services</h4>
+        <ul>
+          <li><a href="services.html" data-i18n="svc.build">Building Construction</a></li>
+          <li><a href="services.html" data-i18n="svc.arch.short">Architecture & Design</a></li>
+          <li><a href="services.html" data-i18n="svc.consult">Consultation</a></li>
+          <li><a href="services.html" data-i18n="svc.reno.short">Renovation & Maintenance</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4 data-i18n="footer.company">Company</h4>
+        <ul>
+          <li><a href="about.html"   data-i18n="nav.about">About Us</a></li>
+          <li><a href="projects.html" data-i18n="nav.projects">Projects</a></li>
+          <li><a href="blog.html"    data-i18n="nav.blog">Blog</a></li>
+          <li><a href="contact.html" data-i18n="nav.contact">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4 data-i18n="footer.contact">Contact Us</h4>
+        <div class="footer-contact-item">
+          <i class="fa-solid fa-envelope fi"></i>
+          <a href="mailto:pyramid.constructor.ltd@gmail.com">pyramid.constructor.ltd@gmail.com</a>
+        </div>
+        <div class="footer-contact-item">
+          <i class="fa-solid fa-phone fi"></i>
+          <a href="tel:+255757744555">0757 744 555</a>
+        </div>
+        <div class="footer-contact-item">
+          <i class="fa-brands fa-whatsapp fi"></i>
+          <a href="https://wa.me/255757744555?text=Hello%20Pyramid%20Engineering%2C%20I%20would%20like%20to%20inquire." target="_blank" data-i18n="footer.wa">WhatsApp Us</a>
+        </div>
+        <div class="footer-contact-item">
+          <i class="fa-solid fa-location-dot fi"></i>
+          <span data-i18n="footer.loc">Dar es Salaam, Tanzania</span>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 Pyramid Engineering & Construction LTD. <span data-i18n="footer.rights">All rights reserved.</span></p>
+      <div class="footer-bottom-links">
+        <a href="#" data-i18n="footer.privacy">Privacy Policy</a>
+        <a href="#" data-i18n="footer.terms">Terms of Service</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- WHATSAPP FLOATING BUTTON -->
+
+<a href="https://wa.me/255757744555?text=Hello%20Pyramid%20Engineering%2C%20I%20would%20like%20to%20inquire%20about%20your%20services." class="whatsapp-float" target="_blank" aria-label="Chat on WhatsApp">
+  <svg viewBox="0 0 24 24" fill="currentColor" width="28" height="28">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+  </svg>
+</a>
+
+<button class="back-top" id="backTop" aria-label="Back to top">
+  <i class="fa-solid fa-chevron-up"></i>
+</button>
+<script>window.PYRAMID_API_URL = 'http://localhost:5000/api';</script>
+<script src="api.js"></script>
+<script src="i18n.js"></script>
+<script src="main.js"></script>
+</body>
+</html>
